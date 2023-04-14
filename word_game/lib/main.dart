@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:word_game/gamePage.dart';
+import 'package:word_game/gameScreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -33,7 +34,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   void navigateGamePage() {
     Navigator.of(context)
-        .push(MaterialPageRoute(builder: ((context) => const GamePage())));
+        .push(MaterialPageRoute(builder: ((context) => GameScreen())));
   }
 
   @override
