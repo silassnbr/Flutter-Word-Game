@@ -26,10 +26,18 @@ class _GamePageState extends State<GamePage> {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(2.0),
                               color: Colors.amber.shade200),
+                          child: ElevatedButton(
+                            onPressed: readletter,
+                            child: Text(harfler[2]),
+                          ),
                         ))
                     .toList(),
               ))
           .toList(),
     );
+  }
+
+  void readletter() {
+    print("read letter");
   }
 }
