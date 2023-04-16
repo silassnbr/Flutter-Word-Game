@@ -12,49 +12,45 @@ class GamePage extends StatefulWidget {
 }
 
 class _GamePageState extends State<GamePage> {
-
-  List row1 = "QWERTYUIOP".split("");
-
   @override
   Widget build(BuildContext context) {
     GameKeyboard bord = GameKeyboard(widget.game);
 
     return Column(
       children: [
-        ... widget.game.wordleBoard
-            .map((e) => Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: row1
-              .map((e) {
-            return InkWell(
-              onTap: () {
-                print(e);
-                setState(() {
-                  widget.game.insertWord(e);
-                });
-                //widget.game.search(widget.game.user_word);
-                print(widget.game.user_word);
-
-              },
-              child: Container(
-                padding: const EdgeInsets.all(2.0),
-                width: 30.0,
-                height: 40.0,
-                margin: const EdgeInsets.all(2.0),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8.0),
-                    color: Colors.amber.shade200),
-                child: Text(
-                  "${e}",
-                  style: TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            );
-          }).toList(),
-          /*.map((e) => Container(
+        ...widget.game.wordleBoard
+            .map(
+              (e) => Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: e.map((e) {
+                  return InkWell(
+                    onTap: () {
+                      print(e);
+                      setState(() {
+                        widget.game.insertWord(e);
+                      });
+                      //widget.game.search(widget.game.user_word);
+                      print(widget.game.user_word);
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(2.0),
+                      width: 30.0,
+                      height: 40.0,
+                      margin: const EdgeInsets.all(2.0),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8.0),
+                          color: Colors.amber.shade200),
+                      child: Text(
+                        e,
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  );
+                }).toList(),
+                /*.map((e) => Container(
                           padding: const EdgeInsets.all(2.0),
                           width: 30.0,
                           height: 20.0,
@@ -68,10 +64,14 @@ class _GamePageState extends State<GamePage> {
                           ),
                         ))
                     .toList(),*/
-        ),
-        ).toList(),
+              ),
+            )
+            .toList(),
         SizedBox(height: 20.0),
-        Text(widget.game.user_word, style: TextStyle(fontSize: 20),),
+        Text(
+          widget.game.user_word,
+          style: TextStyle(fontSize: 20),
+        ),
       ],
     );
   }
