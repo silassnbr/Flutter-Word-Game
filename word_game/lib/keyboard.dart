@@ -11,20 +11,21 @@ class GameKeyboard extends StatefulWidget {
 }
 
 class _GameKeyboardState extends State<GameKeyboard> {
-  final TextEditingController _searchController = TextEditingController();
+  // final TextEditingController _searchController = TextEditingController();
 
   WorldeGame game = WorldeGame();
 
   void _loadWords() async {
-    String tempData = await DefaultAssetBundle.of(context).loadString('assets/words.txt');
+    String tempData =
+        await DefaultAssetBundle.of(context).loadString('assets/words.txt');
     setState(() {
       widget.game.wordsList = tempData.split(',');
       widget.game.filteredWordsList = widget.game.wordsList;
       print(widget.game.wordsList.length);
-
     });
   }
-  void initState(){
+
+  void initState() {
     super.initState();
     _loadWords();
     print("merhabaa");
@@ -42,16 +43,16 @@ class _GameKeyboardState extends State<GameKeyboard> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             ElevatedButton(onPressed: sol, child: const Text("Sil")),
-            SizedBox( // <-- SEE HERE
-              width: 100,
-              child: TextField(
-                controller: _searchController,
-                decoration: const InputDecoration(
-                  hintText: "Kelime ara",
-                ),
-                onChanged: widget.game.search,
-              ),
-            ),
+            // SizedBox( // <-- SEE HERE
+            //   width: 100,
+            //   child: TextField(
+            //     controller: _searchController,
+            //     decoration: const InputDecoration(
+            //       hintText: "Kelime ara",
+            //     ),
+            //     onChanged: widget.game.search,
+            //   ),
+            // ),
 /*            SizedBox( //// <-- SEE HERE
               width: 100,
               child: Text(widget.game.user_word,style: TextStyle(fontSize: 20))
@@ -59,7 +60,6 @@ class _GameKeyboardState extends State<GameKeyboard> {
             ElevatedButton(onPressed: sag, child: Text("Kontrol"))
           ],
         ),
-
       ],
     );
   }
@@ -70,20 +70,21 @@ class _GameKeyboardState extends State<GameKeyboard> {
     //print("aranacaklar ${widget.game.filteredWordsList}");
     print("user_word ${widget.game.user_word}");
     //if(searchQuery.length == widget.game.filteredWordsList[0].length) {
-    if(widget.game.user_word.length == widget.game.filteredWordsList[0].length) {
+    if (widget.game.user_word.length ==
+        widget.game.filteredWordsList[0].length) {
       print("DOĞRU ");
       return true;
-    } else{
+    } else {
       print("Yanlış ");
       return false;
     }
   }
+
   void sol() {
-    _searchController.text="";
+    // _searchController.text="";
     setState(() {
       widget.game.user_word = "";
       print("onayyy");
     });
-
   }
 }

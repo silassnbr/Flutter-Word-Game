@@ -25,7 +25,6 @@ class _GamePageState extends State<GamePage> {
                 children: e.map((e) {
                   return InkWell(
                     onTap: () {
-                      print(e);
                       setState(() {
                         widget.game.insertWord(e);
                       });
