@@ -12,6 +12,7 @@ class GameScreen extends StatefulWidget {
 class _GameScreenState extends State<GameScreen> {
   WorldeGame _game = WorldeGame();
   late String word;
+
   @override
   void initState() {
     super.initState();
@@ -32,7 +33,7 @@ class _GameScreenState extends State<GameScreen> {
           const SizedBox(
             height: 20.0,
           ),
-          GameKeyboard(_game),
+          GameKeyboard(_game,),
         ],
       ),
     );

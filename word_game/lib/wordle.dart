@@ -19,8 +19,24 @@ class WorldeGame {
 
   static void initGame() {
     // final random = Random();
+
+  }
+  var wordsList = [];
+  var filteredWordsList = [];
+  var user_word = "";
+
+  String insertWord(word) {
+    user_word+=word;
+    print("eklendi ${user_word}");
+    search(user_word.toLowerCase());
+    return user_word;
   }
 
+  void search(value){
+    filteredWordsList = wordsList.where((item) => item.startsWith('$value')).toList();
+    print(filteredWordsList.length);
+    user_word = value; //TextField için
+  }
   //checking world
   // bool checkWordExist(String word) {
   //   return word_list.contains(word);
