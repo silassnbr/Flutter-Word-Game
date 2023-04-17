@@ -19,18 +19,18 @@ class _GamePageState extends State<GamePage> {
     return Column(
       children: [
         ...widget.game.wordleBoard.map((e) {
-          int rowIndex =
-              widget.game.wordleBoard.indexOf(e) + 1; // get row index
+          int rowIndex = widget.game.wordleBoard.indexOf(e); // get row index
           return Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(rowIndex.toString()), // add row index as text
               ...e.asMap().entries.map((entry) {
-                int colIndex = entry.key + 1; // get column index
+                int colIndex = entry.key; // get column index
                 return InkWell(
                   onTap: () {
                     setState(() {
-                      widget.game.insertWord(e);
+                      widget.game.insertWord(entry.value);
+                      print(rowIndex * 8 + colIndex);
                     });
                     //widget.game.search(widget.game.user_word);
                     print(widget.game.user_word);
@@ -64,7 +64,7 @@ class _GamePageState extends State<GamePage> {
         }).toList(),
         SizedBox(height: 20.0),
         Text(
-          widget.game.user_word,
+          widget.game.user_word.toString(),
           style: TextStyle(fontSize: 20),
         ),
       ],

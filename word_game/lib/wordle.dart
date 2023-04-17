@@ -120,10 +120,10 @@ class WorldeGame {
   }
   var wordsList = [];
   var filteredWordsList = [];
-  var user_word = "";
+  List<String> user_word = [];
 
-  String insertWord(word) {
-    user_word += word;
+  List<String> insertWord(word) {
+    user_word.add(word);
     print("eklendi ${user_word}");
     // search(user_word.toLowerCase());
     return user_word;

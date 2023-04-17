@@ -83,7 +83,7 @@ class _GameKeyboardState extends State<GameKeyboard> {
   void sol() {
     // _searchController.text="";
     setState(() {
-      widget.game.user_word = "";
+      widget.game.user_word = [];
       print("onayyy");
     });
   }
