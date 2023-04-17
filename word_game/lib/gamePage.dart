@@ -18,54 +18,50 @@ class _GamePageState extends State<GamePage> {
 
     return Column(
       children: [
-        ...widget.game.wordleBoard
-            .map(
-              (e) => Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: e.map((e) {
-                  return InkWell(
-                    onTap: () {
-                      setState(() {
-                        widget.game.insertWord(e);
-                      });
-                      //widget.game.search(widget.game.user_word);
-                      print(widget.game.user_word);
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(2.0),
-                      width: 30.0,
-                      height: 40.0,
-                      margin: const EdgeInsets.all(2.0),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8.0),
-                          color: Colors.amber.shade200),
-                      child: Text(
-                        e,
-                        style: TextStyle(
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  );
-                }).toList(),
-                /*.map((e) => Container(
-                          padding: const EdgeInsets.all(2.0),
-                          width: 30.0,
-                          height: 20.0,
-                          margin: const EdgeInsets.all(2.0),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(2.0),
-                              color: Colors.amber.shade200),
-                          child: ElevatedButton(
-                            onPressed: readletter,
-                            child: Text(harfler[2]),
+        ...widget.game.wordleBoard.map((e) {
+          int rowIndex =
+              widget.game.wordleBoard.indexOf(e) + 1; // get row index
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(rowIndex.toString()), // add row index as text
+              ...e.asMap().entries.map((entry) {
+                int colIndex = entry.key + 1; // get column index
+                return InkWell(
+                  onTap: () {
+                    setState(() {
+                      widget.game.insertWord(e);
+                    });
+                    //widget.game.search(widget.game.user_word);
+                    print(widget.game.user_word);
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(2.0),
+                    width: 40.0,
+                    height: 40.0,
+                    margin: const EdgeInsets.all(2.0),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8.0),
+                        color: Colors.amber.shade200),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          entry.value,
+                          style: TextStyle(
+                            fontSize: 10.0,
+                            fontWeight: FontWeight.bold,
                           ),
-                        ))
-                    .toList(),*/
-              ),
-            )
-            .toList(),
+                        ),
+                        Text(colIndex.toString()), // add column index as text
+                      ],
+                    ),
+                  ),
+                );
+              }).toList(),
+            ],
+          );
+        }).toList(),
         SizedBox(height: 20.0),
         Text(
           widget.game.user_word,
