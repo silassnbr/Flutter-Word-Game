@@ -40,13 +40,13 @@ class _GamePageState extends State<GamePage> {
                     if (secilme[rowIndex * 8 + colIndex] == false) {
                       secilme[rowIndex * 8 + colIndex] = true;
                       setState(() {
-                        widget.game.insertWord(entry.value);
+                        widget.game.insertWord(entry.value, rowIndex, colIndex);
                         print(rowIndex * 8 + colIndex);
                       });
                     } else {
                       setState(() {
                         secilme[rowIndex * 8 + colIndex] = false;
-                        widget.game.deleteWord(entry.value);
+                        widget.game.deleteWord(entry.value, rowIndex, colIndex);
                         print(rowIndex * 8 + colIndex);
                       });
                     }
@@ -83,7 +83,15 @@ class _GamePageState extends State<GamePage> {
         }).toList(),
         SizedBox(height: 20.0),
         Text(
-          widget.game.user_word.toString(),
+          "harf  " + widget.game.user_word.toString(),
+          style: TextStyle(fontSize: 20),
+        ),
+        Text(
+          "satır  " + widget.game.satir.toString(),
+          style: TextStyle(fontSize: 20),
+        ),
+        Text(
+          "sutun  " + widget.game.sutun.toString(),
           style: TextStyle(fontSize: 20),
         ),
       ],

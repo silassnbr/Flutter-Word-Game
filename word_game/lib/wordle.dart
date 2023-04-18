@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:math';
 
 List<String> harfler = [
@@ -121,17 +122,24 @@ class WorldeGame {
   var wordsList = [];
   var filteredWordsList = [];
   List<String> user_word = [];
-
-  List<String> insertWord(word) {
+  List<int> satir = [];
+  List<int> sutun = [];
+  List<String> insertWord(word, row, col) {
     user_word.add(word);
+    satir.add(row);
+    sutun.add(col);
     print("eklendi ${user_word}");
     // search(user_word.toLowerCase());
     return user_word;
   }
 
-  List<String> deleteWord(word) {
+  List<String> deleteWord(word, row, col) {
     user_word.remove(word);
+    satir.remove(row);
+    sutun.remove(col);
+
     print("silindi ${user_word}");
+    print(satir);
     // search(user_word.toLowerCase());
     return user_word;
   }
