@@ -11,6 +11,7 @@ class GameScreen extends StatefulWidget {
 
 class _GameScreenState extends State<GameScreen> {
   WorldeGame _game = WorldeGame();
+  Letter _letter = Letter();
   late String word;
 
   @override
@@ -33,7 +34,7 @@ class _GameScreenState extends State<GameScreen> {
           const SizedBox(
             height: 20.0,
           ),
-          GameKeyboard(_game),
+          GameKeyboard(_game , _letter),
         ],
       ),
     );

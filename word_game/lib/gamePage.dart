@@ -5,8 +5,9 @@ import 'package:word_game/main.dart';
 import 'package:word_game/wordle.dart';
 
 class GamePage extends StatefulWidget {
-  GamePage(this.game, {Key? key}) : super(key: key);
+  GamePage(this.game, this.letter, {Key? key}) : super(key: key);
   WorldeGame game;
+  Letter letter;
 
   @override
   State<GamePage> createState() => _GamePageState();
@@ -23,12 +24,12 @@ class _GamePageState extends State<GamePage> {
 
   @override
   Widget build(BuildContext context) {
-    GameKeyboard bord = GameKeyboard(widget.game);
+    GameKeyboard bord = GameKeyboard(widget.game, widget.letter);
 
     return Column(
       children: [
-        ...widget.game.wordleBoard.map((e) {
-          int rowIndex = widget.game.wordleBoard.indexOf(e); // get row index
+        ...widget.letter.wordleBoard.map((e) {
+          int rowIndex = widget.letter.wordleBoard.indexOf(e); // get row index
           return Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -68,11 +69,11 @@ class _GamePageState extends State<GamePage> {
                         Text(
                           entry.value,
                           style: TextStyle(
-                            fontSize: 10.0,
+                            fontSize: 20.0,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        Text(colIndex.toString()), // add column index as text
+                        //Text(colIndex.toString()), // add column index as text
                       ],
                     ),
                   ),

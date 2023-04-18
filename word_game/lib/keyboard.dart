@@ -4,8 +4,9 @@ import 'package:word_game/gamePage.dart';
 import 'package:word_game/wordle.dart';
 
 class GameKeyboard extends StatefulWidget {
-  GameKeyboard(this.game, {Key? key}) : super(key: key);
+  GameKeyboard(this.game, this.letter, {Key? key}) : super(key: key);
   WorldeGame game;
+  Letter letter;
   @override
   State<GameKeyboard> createState() => _GameKeyboardState();
 }
@@ -35,7 +36,7 @@ class _GameKeyboardState extends State<GameKeyboard> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        GamePage(widget.game),
+        GamePage(widget.game , widget.letter ),
         SizedBox(
           height: 40.0,
         ),
@@ -84,6 +85,8 @@ class _GameKeyboardState extends State<GameKeyboard> {
     // _searchController.text="";
     setState(() {
       widget.game.user_word = [];
+      widget.game.satir = [];
+      widget.game.sutun = [];
       print("onayyy");
     });
   }
