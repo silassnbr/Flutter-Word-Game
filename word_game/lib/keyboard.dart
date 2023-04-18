@@ -87,6 +87,7 @@ class _GameKeyboardState extends State<GameKeyboard> {
       widget.game.user_word = [];
       widget.game.satir = [];
       widget.game.sutun = [];
+      widget.game.secilme = List.filled(80, false);
       print("onayyy");
     });
   }

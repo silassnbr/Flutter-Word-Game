@@ -17,6 +17,8 @@ class WorldeGame {
   }
   var wordsList = [];
   var filteredWordsList = [];
+  List<bool> secilme = List.filled(80, false);
+
   List<String> user_word = [];
   List<int> satir = [];
   List<int> sutun = [];

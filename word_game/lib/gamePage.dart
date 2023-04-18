@@ -13,14 +13,14 @@ class GamePage extends StatefulWidget {
   State<GamePage> createState() => _GamePageState();
 }
 
-List<bool> secilme = [];
+//List<bool> secilme = [];
 
 class _GamePageState extends State<GamePage> {
   @override
-  void initState() {
+/*  void initState() {
     secilme = List.filled(80, false);
     super.initState();
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -38,15 +38,15 @@ class _GamePageState extends State<GamePage> {
                 int colIndex = entry.key; // get column index
                 return GestureDetector(
                   onTap: () {
-                    if (secilme[rowIndex * 8 + colIndex] == false) {
-                      secilme[rowIndex * 8 + colIndex] = true;
+                    if (widget.game.secilme[rowIndex * 8 + colIndex] == false) {
+                      widget.game.secilme[rowIndex * 8 + colIndex] = true;
                       setState(() {
                         widget.game.insertWord(entry.value, rowIndex, colIndex);
                         print(rowIndex * 8 + colIndex);
                       });
                     } else {
                       setState(() {
-                        secilme[rowIndex * 8 + colIndex] = false;
+                        widget.game.secilme[rowIndex * 8 + colIndex] = false;
                         widget.game.deleteWord(entry.value, rowIndex, colIndex);
                         print(rowIndex * 8 + colIndex);
                       });
