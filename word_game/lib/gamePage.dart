@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:word_game/keyboard.dart';
+import 'package:word_game/main.dart';
 import 'package:word_game/wordle.dart';
 
 class GamePage extends StatefulWidget {
@@ -11,7 +12,15 @@ class GamePage extends StatefulWidget {
   State<GamePage> createState() => _GamePageState();
 }
 
+List<bool> secilme = [];
+
 class _GamePageState extends State<GamePage> {
+  @override
+  void initState() {
+    secilme = List.filled(80, false);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     GameKeyboard bord = GameKeyboard(widget.game);
@@ -26,12 +35,22 @@ class _GamePageState extends State<GamePage> {
               Text(rowIndex.toString()), // add row index as text
               ...e.asMap().entries.map((entry) {
                 int colIndex = entry.key; // get column index
-                return InkWell(
+                return GestureDetector(
                   onTap: () {
-                    setState(() {
-                      widget.game.insertWord(entry.value);
-                      print(rowIndex * 8 + colIndex);
-                    });
+                    if (secilme[rowIndex * 8 + colIndex] == false) {
+                      secilme[rowIndex * 8 + colIndex] = true;
+                      setState(() {
+                        widget.game.insertWord(entry.value);
+                        print(rowIndex * 8 + colIndex);
+                      });
+                    } else {
+                      setState(() {
+                        secilme[rowIndex * 8 + colIndex] = false;
+                        widget.game.deleteWord(entry.value);
+                        print(rowIndex * 8 + colIndex);
+                      });
+                    }
+
                     //widget.game.search(widget.game.user_word);
                     print(widget.game.user_word);
                   },

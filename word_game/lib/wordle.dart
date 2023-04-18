@@ -129,6 +129,13 @@ class WorldeGame {
     return user_word;
   }
 
+  List<String> deleteWord(word) {
+    user_word.remove(word);
+    print("silindi ${user_word}");
+    // search(user_word.toLowerCase());
+    return user_word;
+  }
+
   // void search(value) {
   //   filteredWordsList =
   //       wordsList.where((item) => item.startsWith('$value')).toList();
