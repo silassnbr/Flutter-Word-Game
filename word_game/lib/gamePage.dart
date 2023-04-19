@@ -1,8 +1,13 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:word_game/keyboard.dart';
 import 'package:word_game/main.dart';
 import 'package:word_game/wordle.dart';
+
+List<int> yukseklik = [3, 3, 3, 3, 3, 3, 3, 3];
+Color _backgroundColor = Colors.white;
 
 class GamePage extends StatefulWidget {
   GamePage(this.game, this.letter, {Key? key}) : super(key: key);
@@ -32,7 +37,7 @@ class _GamePageState extends State<GamePage> {
   int _currentIndex = 0;
   int sat = 0;
   void _startScrolling() {
-    Future.delayed(Duration(seconds: 1)).then((_) {
+    Future.delayed(Duration(milliseconds: 100)).then((_) {
       setState(() {
         if (_currentIndex < harfler.length - 27) {
           print(harfler);
@@ -55,10 +60,40 @@ class _GamePageState extends State<GamePage> {
     });
   }
 
+  int i = 0;
+  void _asagi(int a) {
+    Future.delayed(Duration(seconds: 1)).then((_) {
+      setState(() {
+        if (harfler[a + 8] == "") {
+          harfler[a + 8] = harfler[a];
+          harfler[a] = "";
+          a = a + 8;
+          i++;
+          // update the current index to point to the new first item
+        }
+      });
+      _asagi(a);
+    });
+  }
+
+  void changeColor() {
+    Future.delayed(Duration(seconds: 5)).then((_) {
+      setState(() {
+        int rand = Random().nextInt(10);
+        int randSut = Random().nextInt(7);
+
+        harfler[randSut] = rand.toString();
+        _asagi(randSut);
+      });
+      changeColor();
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     _startScrolling();
+    changeColor();
   }
 
   @override
@@ -103,7 +138,7 @@ class _GamePageState extends State<GamePage> {
                     margin: const EdgeInsets.all(2.0),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8.0),
-                        color: Colors.amber.shade200),
+                        color: _backgroundColor),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
