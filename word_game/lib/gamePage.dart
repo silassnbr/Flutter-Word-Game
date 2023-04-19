@@ -30,22 +30,25 @@ class _GamePageState extends State<GamePage> {
   // }
 
   int _currentIndex = 0;
-
+  int sat = 0;
   void _startScrolling() {
     Future.delayed(Duration(seconds: 1)).then((_) {
       setState(() {
-        if (_currentIndex < harfler.length - 10) {
+        if (_currentIndex < harfler.length - 27) {
           print(harfler);
           // move the last 8 items to the beginning of the list
           for (int i = 0; i < 8; i++) {
+            harfler[_currentIndex + i + 24] = harfler[_currentIndex + 16 + i];
+            harfler[_currentIndex + i + 16] = harfler[_currentIndex + 8 + i];
             harfler[_currentIndex + i + 8] = harfler[_currentIndex + i];
           }
           // clear the last 8 items
           for (int i = _currentIndex; i < _currentIndex + 8; i++) {
             harfler[i] = "";
           }
-          // update the current index to point to the new first item
           _currentIndex = _currentIndex + 8;
+
+          // update the current index to point to the new first item
         }
       });
       _startScrolling();
