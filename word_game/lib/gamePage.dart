@@ -16,11 +16,47 @@ class GamePage extends StatefulWidget {
 //List<bool> secilme = [];
 
 class _GamePageState extends State<GamePage> {
+  // void kaydirma() async {
+  //   setState(() {
+  //     harfler[0] = "a";
+  //     harfler[8] = "1";
+  //   });
+  // }
+
+  // void initState() {
+  //   super.initState();
+  //   kaydirma();
+  //   print("kaydirma");
+  // }
+
+  int _currentIndex = 0;
+
+  void _startScrolling() {
+    Future.delayed(Duration(seconds: 1)).then((_) {
+      setState(() {
+        if (_currentIndex < harfler.length - 10) {
+          print(harfler);
+          // move the last 8 items to the beginning of the list
+          for (int i = 0; i < 8; i++) {
+            harfler[_currentIndex + i + 8] = harfler[_currentIndex + i];
+          }
+          // clear the last 8 items
+          for (int i = _currentIndex; i < _currentIndex + 8; i++) {
+            harfler[i] = "";
+          }
+          // update the current index to point to the new first item
+          _currentIndex = _currentIndex + 8;
+        }
+      });
+      _startScrolling();
+    });
+  }
+
   @override
-/*  void initState() {
-    secilme = List.filled(80, false);
+  void initState() {
     super.initState();
-  }*/
+    _startScrolling();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +103,7 @@ class _GamePageState extends State<GamePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          entry.value,
+                          harfler[rowIndex * 8 + colIndex].toString(),
                           style: TextStyle(
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
