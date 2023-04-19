@@ -80,13 +80,15 @@ class _GamePageState extends State<GamePage> {
                     if (widget.game.secilme[rowIndex * 8 + colIndex] == false) {
                       widget.game.secilme[rowIndex * 8 + colIndex] = true;
                       setState(() {
-                        widget.game.insertWord(entry.value, rowIndex, colIndex);
+                        widget.game.insertWord(harfler[rowIndex * 8 + colIndex],
+                            rowIndex, colIndex);
                         print(rowIndex * 8 + colIndex);
                       });
                     } else {
                       setState(() {
                         widget.game.secilme[rowIndex * 8 + colIndex] = false;
-                        widget.game.deleteWord(entry.value, rowIndex, colIndex);
+                        widget.game.deleteWord(harfler[rowIndex * 8 + colIndex],
+                            rowIndex, colIndex);
                         print(rowIndex * 8 + colIndex);
                       });
                     }
