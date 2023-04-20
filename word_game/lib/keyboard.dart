@@ -70,18 +70,31 @@ class _GameKeyboardState extends State<GameKeyboard> {
 
   Future<bool?> sag() async {
     String secilen = "";
+    int secilen_sesli =0;
+    int secilen_sessiz =0;
+
     WidgetsFlutterBinding.ensureInitialized();
     List<String> falling_letters =
-        widget.letter.randomLetter(4, 4); // sesli sessiz harf sayısı
+        widget.letter.randomLetter(5, 7); // sesli sessiz harf sayısı
     print("user_word ${widget.game.user_word}");
     for (int i = 0; i < widget.game.user_word.length; i++) {
       secilen += widget.game.user_word[i];
     }
     if (!widget.game.filteredWordsList.isEmpty) {
       if (secilen.length == widget.game.filteredWordsList[0].length) {
+
+        for (int i = 0; i < widget.game.user_word.length; i++) {
+          if ("aeıioöuü".contains(widget.game.user_word[i]))
+            secilen_sesli += 1;
+          else if ("zyvtşsrpnrmlkhjğgdçcb".contains(widget.game.user_word[i]))
+            secilen_sessiz += 1;
+        }
         print("DOĞRU ");
         setState(() {
           dogru = dogru + 1;
+          adet_sesli -= secilen_sesli;
+          adet_sessiz -= secilen_sessiz;
+          adet_harf -= secilen.length;
           puan();
           sol();
         });

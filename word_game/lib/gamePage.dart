@@ -70,7 +70,7 @@ class _GamePageState extends State<GamePage> {
         //int rand = Random().nextInt(10);
         int randSut = Random().nextInt(8);
 
-        harfler[randSut] = widget.letter.randomLetter(1, 0)[0];
+        harfler[randSut] = widget.letter.ratio_check();
         _asagi(randSut);
       });
       changeColor();

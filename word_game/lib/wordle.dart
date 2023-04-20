@@ -82,23 +82,26 @@ class WorldeGame {
   // }
 }
 
+int adet_sesli = 12;
+int adet_sessiz = 12;
+int adet_harf = 24;
 
 class Letter {
-  int adet_sesli = 12;
-  int adet_sessiz = 12;
-  int adet_harf = 24;
 
-  String? ratio_check() {
-    String? letter;
+  String ratio_check() {
+    String letter="";
     var random = Random();
     var randomNumber;
-    if (adet_sesli / adet_harf < 50) {
-      randomNumber = random.nextInt(11);
+    if (adet_sesli / adet_harf < 0.50) { //min sesli harf oranı
+      randomNumber = random.nextInt(10);
       letter = sesli_harfler[randomNumber];
-    } else if (adet_sessiz / adet_harf < 50) {
-      randomNumber = random.nextInt(22);
-      letter = sesli_harfler[randomNumber];
+      adet_sesli += 1;
+    } else{
+      randomNumber = random.nextInt(21);
+      letter = sessiz_harfler[randomNumber];
+      adet_sessiz += 1;
     }
+    adet_harf += 1;
     return letter;
   }
 
@@ -110,6 +113,7 @@ class Letter {
         sesli_harfler.sublist(0, sesli) + sessiz_harfler.sublist(0, sessiz);
 
     random_letters.shuffle();
+    adet_harf += 8;
     return random_letters;
   }
 
