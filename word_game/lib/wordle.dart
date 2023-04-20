@@ -66,12 +66,16 @@ class WorldeGame {
     return user_word;
   }
 
-  // void search(value) {
-  //   filteredWordsList =
-  //       wordsList.where((item) => item.startsWith('$value')).toList();
-  //   print(filteredWordsList.length);
-  //   user_word = value; //TextField için
-  // }
+   void search() {
+     String secilen = "";
+     for (int i = 0; i < user_word.length; i++) {
+       secilen += user_word[i];
+     }
+     filteredWordsList =
+         wordsList.where((item) => item.startsWith('$secilen')).toList();
+     print(filteredWordsList.length);
+     //user_word = value; //TextField için
+   }
   //checking world
   // bool checkWordExist(String word) {
   //   return word_list.contains(word);

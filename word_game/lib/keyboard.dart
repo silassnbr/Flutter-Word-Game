@@ -76,12 +76,8 @@ class _GameKeyboardState extends State<GameKeyboard> {
     for (int i = 0; i < widget.game.user_word.length; i++) {
       secilen += widget.game.user_word[i];
     }
-    print("-------------------------");
-    print(secilen);
-    if (widget.game.kelimeler.contains(secilen)) {
-      setState(() {
-        dogru = dogru + 1;
-      });
+    if (secilen.length ==
+        widget.game.filteredWordsList[0].length) {
       print("DOĞRU ");
       return true;
     } else {

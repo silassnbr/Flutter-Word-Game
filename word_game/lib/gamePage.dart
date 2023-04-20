@@ -111,6 +111,7 @@ class _GamePageState extends State<GamePage> {
                             rowIndex, colIndex);
                       });
                     }
+                    widget.game.search();
                   },
                   child: Container(
                     padding: const EdgeInsets.all(2.0),
