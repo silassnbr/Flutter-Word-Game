@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:word_game/gamePage.dart';
 import 'package:word_game/gameScreen.dart';
 import 'package:word_game/wordle.dart';
@@ -59,7 +60,7 @@ class _GameKeyboardState extends State<GameKeyboard> {
     int secilen_sesli = 0;
     int secilen_sessiz = 0;
 
-    WidgetsFlutterBinding.ensureInitialized();
+    //WidgetsFlutterBinding.ensureInitialized();
     List<String> falling_letters =
         widget.letter.randomLetter(5, 7); // sesli sessiz harf sayısı
     print("user_word ${widget.game.user_word}");
@@ -69,17 +70,22 @@ class _GameKeyboardState extends State<GameKeyboard> {
     if (!widget.game.filteredWordsList.isEmpty) {
       if (secilen.length == widget.game.filteredWordsList[0].length) {
         for (int i = 0; i < widget.game.user_word.length; i++) {
-          if ("aeıioöuü".contains(widget.game.user_word[i]))
+          if ("aeıioöuü".contains(widget.game.user_word[i])) {
+            print(widget.game.user_word[i]);
             secilen_sesli += 1;
-          else if ("zyvtşsrpnrmlkhjğgdçcb".contains(widget.game.user_word[i]))
+            print(secilen_sesli);
+          } else{
             secilen_sessiz += 1;
+            print(secilen_sessiz);
+
+          }
         }
+        adet_sesli -= secilen_sesli;
+        adet_sessiz -= secilen_sessiz;
+        adet_harf -= secilen.length;
         print("DOĞRU ");
         setState(() {
           dogru = dogru + 1;
-          adet_sesli -= secilen_sesli;
-          adet_sessiz -= secilen_sessiz;
-          adet_harf -= secilen.length;
           puan();
           dogru_kaydir();
           sol();
@@ -164,13 +170,16 @@ class _GameKeyboardState extends State<GameKeyboard> {
       sutun = widget.game.sutun[i];
       print("silinen ${harfler[(satir) * 8 +sutun]}");
 
-      for(int i=0; i<satir; satir--){
+      for(int i=yukseklik[sutun]; (9- i) <satir; satir--){
+        if(satir==0)
+          break;
         harfler[(satir) * 8 +sutun] ="" ;
         harfler[(satir) * 8 +sutun] = harfler[(satir - 1) * 8 +sutun];
         print("alta yaz ${harfler[(satir - 1) * 8 +sutun]}");
         harfler[(satir - 1) * 8 +sutun] = "";
-        //satir = satir -1;
       }
+      yukseklik[sutun] = yukseklik[sutun] - 1;
+
 
     }
 
