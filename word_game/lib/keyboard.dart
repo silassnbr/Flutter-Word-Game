@@ -66,7 +66,7 @@ class _GameKeyboardState extends State<GameKeyboard> {
     );
   }
 
-  Future<bool> sag() async {
+  void sag() async {
     String secilen = "";
     WidgetsFlutterBinding.ensureInitialized();
     //String searchQuery = _searchController.text;
@@ -76,16 +76,28 @@ class _GameKeyboardState extends State<GameKeyboard> {
     for (int i = 0; i < widget.game.user_word.length; i++) {
       secilen += widget.game.user_word[i];
     }
-    if (secilen.length ==
-        widget.game.filteredWordsList[0].length) {
-      print("DOĞRU ");
-      return true;
-    } else {
+    if(!widget.game.filteredWordsList.isEmpty) {
+      if (secilen.length == widget.game.filteredWordsList[0].length) {
+        print("DOĞRU ");
+        setState(() {
+          dogru = dogru + 1;
+        });
+        print(dogru);
+        //return true;
+      } else {
+        setState(() {
+          dogru = dogru - 1;
+        });
+        print("Yanlış ");
+        //return false;
+      }
+    }
+    else {
       setState(() {
         dogru = dogru - 1;
       });
       print("Yanlış ");
-      return false;
+      //return false;
     }
   }
 
