@@ -1,7 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:word_game/keyboard.dart';
-import 'package:word_game/main.dart';
 import 'package:word_game/wordle.dart';
 
 class GamePage extends StatefulWidget {
@@ -16,12 +17,96 @@ class GamePage extends StatefulWidget {
 //List<bool> secilme = [];
 
 class _GamePageState extends State<GamePage> {
-  @override
-/*  void initState() {
-    secilme = List.filled(80, false);
-    super.initState();
-  }*/
 
+  int _currentIndex = 0;
+  int sat = 0;
+  int temp = 0;
+  int count = 0;
+  var random_row = 0;
+  bool temp_flag = true;
+
+  List<String> falling_letters = [];
+  List<int> remove_animation = [];
+
+  void row_control(){
+
+    if(temp%2 == 0) { // temp < 3
+      count = 8;
+      random_row = 0;
+    } else {
+      count = 1;
+      var random = Random();
+      random_row = random.nextInt(8);
+    }
+    falling_letters = widget.letter.shuffleLetters(count);
+
+    flag = false;
+    _currentIndex = 0;
+    temp +=1;
+  }
+  bool flag = false;
+  void _startScrolling() {
+
+    if(temp == 0)
+      row_control();
+
+    Future.delayed(Duration(milliseconds: 1000)).then((_) {
+      setState(() {
+        if (_currentIndex < 72) {
+          // move the last 8 items to the beginning of the list
+          for (int i = 0; i < count; i++) {
+
+            if(harfler[_currentIndex + i + 8 + random_row] == "") {
+              harfler[_currentIndex + i + 8 + random_row] = falling_letters[i];
+              remove_animation.add(_currentIndex + i + random_row);
+            }
+          }
+          print(remove_animation);
+          // clear the last 8 items
+          for (int i = 0; i < remove_animation.length; i++) {
+             harfler[remove_animation[i]] = "";
+          }
+          remove_animation = [];
+          _currentIndex = _currentIndex + 8;
+  /*        if(_currentIndex == 80)
+            flag = true;*/
+
+          // update the current index to point to the new first item
+        }
+      });
+
+      for(int i =0; i < count; i++){
+        if(!hit_floor(i))
+          break;
+      }
+      //print("hit_floor ${hit_floor(count)}");
+      if(flag){
+        row_control();
+      }
+      _startScrolling();
+    });
+  }
+
+  bool hit_floor(int row_ind){
+    int next_index =0;
+    next_index = _currentIndex +8 + row_ind;
+
+    if( _currentIndex > 71 || harfler[next_index] != ""){
+      flag = true;
+      return true;
+    }
+    else
+      flag = false;
+      return false;
+
+  }
+
+  @override
+
+  void initState() {
+    super.initState();
+    _startScrolling();
+  }
   @override
   Widget build(BuildContext context) {
     GameKeyboard bord = GameKeyboard(widget.game, widget.letter);
@@ -41,13 +126,15 @@ class _GamePageState extends State<GamePage> {
                     if (widget.game.secilme[rowIndex * 8 + colIndex] == false) {
                       widget.game.secilme[rowIndex * 8 + colIndex] = true;
                       setState(() {
-                        widget.game.insertWord(entry.value, rowIndex, colIndex);
+                        widget.game.insertWord(harfler[rowIndex * 8 + colIndex],
+                            rowIndex, colIndex);
                         print(rowIndex * 8 + colIndex);
                       });
                     } else {
                       setState(() {
                         widget.game.secilme[rowIndex * 8 + colIndex] = false;
-                        widget.game.deleteWord(entry.value, rowIndex, colIndex);
+                        widget.game.deleteWord(harfler[rowIndex * 8 + colIndex],
+                            rowIndex, colIndex);
                         print(rowIndex * 8 + colIndex);
                       });
                     }
@@ -67,7 +154,7 @@ class _GamePageState extends State<GamePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          entry.value,
+                          harfler[rowIndex * 8 + colIndex].toString(),
                           style: TextStyle(
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,

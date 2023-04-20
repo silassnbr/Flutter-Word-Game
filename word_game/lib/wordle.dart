@@ -1,14 +1,36 @@
 import 'dart:ffi';
 import 'dart:math';
-List<String> sesli_harfler= ["a", "e", "ı", "i", "o", "ö", "u", "ü", "a", "e"];
-List<String> sessiz_harfler= ["z", "y", "v", "t", "ş", "s", "r", "p", "n", "r", "m", "l", "k", "h", "j", "ğ", "g", "d", "ç", "c", "b"];
-List<String?> harfler = List.filled(80, "");
+
+List<String> sesli_harfler = ["a", "e", "ı", "i", "o", "ö", "u", "ü", "a", "e"];
+List<String> sessiz_harfler = [
+  "z",
+  "y",
+  "v",
+  "t",
+  "ş",
+  "s",
+  "r",
+  "p",
+  "n",
+  "r",
+  "m",
+  "l",
+  "k",
+  "h",
+  "j",
+  "ğ",
+  "g",
+  "d",
+  "ç",
+  "c",
+  "b"
+];
+List<String> harfler = List.filled(80, "");
 
 class WorldeGame {
   //setting the game variables
   int rowId = 0;
   int letterId = 0;
-
 
   static bool gameOver = false;
 
@@ -59,43 +81,43 @@ class Letter {
   int adet_sessiz = 12;
   int adet_harf = 24;
 
-  String? ratio_check(){
+  String? ratio_check() {
     String? letter;
     var random = Random();
     var randomNumber;
-    if(adet_sesli/adet_harf < 50){
+    if (adet_sesli / adet_harf < 50) {
       randomNumber = random.nextInt(11);
       letter = sesli_harfler[randomNumber];
-    }
-    else if(adet_sessiz/adet_harf < 50){
+    } else if (adet_sessiz / adet_harf < 50) {
       randomNumber = random.nextInt(22);
       letter = sesli_harfler[randomNumber];
     }
     return letter;
   }
 
-  static shuffleLetters() {
-
+  shuffleLetters(count) {
     sesli_harfler.shuffle();
     sessiz_harfler.shuffle();
-    List<String> random_letter = sesli_harfler.sublist(0, 10) + sessiz_harfler.sublist(0, 14);
+    List<String> random_letter =
+        sesli_harfler.sublist(0, 10) + sessiz_harfler.sublist(0, 14);
 
     random_letter.shuffle();
-    harfler.setRange(56, 80, random_letter);
-    return harfler;
+    //harfler.setRange(0, 24, random_letter, 0);
+    return random_letter.sublist(0, count);
   }
   //static List<String>harfler_new = shuffleSesliHarfler();
 
   List<List<String>> wordleBoard;
 
-  Letter() : wordleBoard = List.generate(
-    10,
-        (index) {
-      //shuffleSesliHarfler();
-      return List.generate(
-        8,
-            (indexx) => shuffleLetters()[indexx + index * 8],
-      );
-    },
-  );
+  Letter()
+      : wordleBoard = List.generate(
+          10,
+          (index) {
+            //shuffleSesliHarfler();
+            return List.generate(
+              8,
+              (indexx) => harfler[indexx + index * 8],
+            );
+          },
+        );
 }

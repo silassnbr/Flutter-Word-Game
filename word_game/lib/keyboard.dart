@@ -36,7 +36,7 @@ class _GameKeyboardState extends State<GameKeyboard> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        GamePage(widget.game , widget.letter ),
+        GamePage(widget.game, widget.letter),
         SizedBox(
           height: 40.0,
         ),
