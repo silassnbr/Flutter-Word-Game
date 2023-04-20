@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:word_game/gamePage.dart';
@@ -66,6 +68,7 @@ class _GameKeyboardState extends State<GameKeyboard> {
     );
   }
 
+  List<String> falling_letters = ["a", "b", "a", "b", "a", "b", "a", "b"];
   Future<bool?> sag() async {
     String secilen = "";
     WidgetsFlutterBinding.ensureInitialized();
@@ -91,19 +94,35 @@ class _GameKeyboardState extends State<GameKeyboard> {
         yanlis = yanlis + 1;
         print("88888888888    " + yanlis.toString());
       });
+      int ilkEleman = 0;
       if (yanlis == 3) {
-        showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-                  title: const Text("3 yanlıs yaptınızzzz"),
-                  content: Text("3 yanlısss"),
-                ));
+        harfler.setRange(0, 8, falling_letters);
+        Timer.periodic(Duration(milliseconds: 100), (timer) {
+          setState(() {
+            kaydir(ilkEleman);
+            ilkEleman += 8;
+          });
+        });
+
         yanlis = 0;
       }
       print("Yanlış ");
 
       return false;
     }
+  }
+
+  void kaydir(ilkEleman) async {
+    setState(() {
+      if (ilkEleman < 72) {
+        for (int i = 0; i < 8; i++) {
+          if (harfler[ilkEleman + i + 8] == "") {
+            harfler[ilkEleman + i + 8] = harfler[ilkEleman + i];
+            harfler[ilkEleman + i] = "";
+          }
+        }
+      }
+    });
   }
 
   void sol() {
