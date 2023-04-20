@@ -66,7 +66,7 @@ class _GameKeyboardState extends State<GameKeyboard> {
     );
   }
 
-  Future<bool> sag() async {
+  Future<bool?> sag() async {
     String secilen = "";
     WidgetsFlutterBinding.ensureInitialized();
     //String searchQuery = _searchController.text;
@@ -76,7 +76,7 @@ class _GameKeyboardState extends State<GameKeyboard> {
     for (int i = 0; i < widget.game.user_word.length; i++) {
       secilen += widget.game.user_word[i];
     }
-    if(!widget.game.filteredWordsList.isEmpty) {
+    if (!widget.game.filteredWordsList.isEmpty) {
       if (secilen.length == widget.game.filteredWordsList[0].length) {
         print("DOĞRU ");
         setState(() {
@@ -84,19 +84,24 @@ class _GameKeyboardState extends State<GameKeyboard> {
         });
         print(dogru);
         return true;
-      } else {
-        setState(() {
-          dogru = dogru - 1;
-        });
-        print("Yanlış ");
-        return false;
       }
-    }
-    else {
+    } else {
       setState(() {
         dogru = dogru - 1;
+        yanlis = yanlis + 1;
+        print("88888888888    " + yanlis.toString());
       });
+      if (yanlis == 3) {
+        showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+                  title: const Text("3 yanlıs yaptınızzzz"),
+                  content: Text("3 yanlısss"),
+                ));
+        yanlis = 0;
+      }
       print("Yanlış ");
+
       return false;
     }
   }

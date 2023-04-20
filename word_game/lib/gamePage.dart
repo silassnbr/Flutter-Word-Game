@@ -6,6 +6,7 @@ import 'package:word_game/wordle.dart';
 List<int> yukseklik = [3, 3, 3, 3, 3, 3, 3, 3];
 Color _backgroundColor = Colors.white;
 int dogru = 0;
+int yanlis = 0;
 
 class GamePage extends StatefulWidget {
   GamePage(this.game, this.letter, {Key? key}) : super(key: key);
