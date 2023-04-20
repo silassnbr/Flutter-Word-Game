@@ -47,20 +47,6 @@ class _GameKeyboardState extends State<GameKeyboard> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             ElevatedButton(onPressed: sol, child: const Text("Sil")),
-            // SizedBox( // <-- SEE HERE
-            //   width: 100,
-            //   child: TextField(
-            //     controller: _searchController,
-            //     decoration: const InputDecoration(
-            //       hintText: "Kelime ara",
-            //     ),
-            //     onChanged: widget.game.search,
-            //   ),
-            // ),
-/*            SizedBox( //// <-- SEE HERE
-              width: 100,
-              child: Text(widget.game.user_word,style: TextStyle(fontSize: 20))
-            ),*/
             ElevatedButton(onPressed: sag, child: Text("Kontrol"))
           ],
         ),
@@ -70,8 +56,8 @@ class _GameKeyboardState extends State<GameKeyboard> {
 
   Future<bool?> sag() async {
     String secilen = "";
-    int secilen_sesli =0;
-    int secilen_sessiz =0;
+    int secilen_sesli = 0;
+    int secilen_sessiz = 0;
 
     WidgetsFlutterBinding.ensureInitialized();
     List<String> falling_letters =
@@ -82,7 +68,6 @@ class _GameKeyboardState extends State<GameKeyboard> {
     }
     if (!widget.game.filteredWordsList.isEmpty) {
       if (secilen.length == widget.game.filteredWordsList[0].length) {
-
         for (int i = 0; i < widget.game.user_word.length; i++) {
           if ("aeıioöuü".contains(widget.game.user_word[i]))
             secilen_sesli += 1;
@@ -110,6 +95,9 @@ class _GameKeyboardState extends State<GameKeyboard> {
         int ilkEleman = 0;
         if (yanlis == 3) {
           harfler.setRange(0, 8, falling_letters);
+          for (int i = 0; i < 8; i++) {
+            yukseklik[i] = yukseklik[i] + 1;
+          }
           Timer.periodic(Duration(seconds: 1), (timer) {
             setState(() {
               kaydir(ilkEleman);
@@ -132,6 +120,10 @@ class _GameKeyboardState extends State<GameKeyboard> {
       int ilkEleman = 0;
       if (yanlis == 3) {
         harfler.setRange(0, 8, falling_letters);
+        for (int i = 0; i < 8; i++) {
+          yukseklik[i] = yukseklik[i] + 1;
+        }
+        print(yukseklik);
         Timer.periodic(Duration(seconds: 1), (timer) {
           setState(() {
             kaydir(ilkEleman);

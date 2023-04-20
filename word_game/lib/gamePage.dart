@@ -69,8 +69,10 @@ class _GamePageState extends State<GamePage> {
       setState(() {
         //int rand = Random().nextInt(10);
         int randSut = Random().nextInt(8);
-
+        yukseklik[randSut] = yukseklik[randSut] + 1;
         harfler[randSut] = widget.letter.ratio_check();
+        print("*************************    ");
+        print(yukseklik);
         _asagi(randSut);
       });
       changeColor();
