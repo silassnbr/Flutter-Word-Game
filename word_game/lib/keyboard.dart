@@ -68,11 +68,11 @@ class _GameKeyboardState extends State<GameKeyboard> {
     );
   }
 
-
   Future<bool?> sag() async {
     String secilen = "";
     WidgetsFlutterBinding.ensureInitialized();
-    List<String> falling_letters = widget.letter.randomLetter(4, 4);// sesli sessiz harf sayısı
+    List<String> falling_letters =
+        widget.letter.randomLetter(4, 4); // sesli sessiz harf sayısı
     print("user_word ${widget.game.user_word}");
     for (int i = 0; i < widget.game.user_word.length; i++) {
       secilen += widget.game.user_word[i];
@@ -83,11 +83,12 @@ class _GameKeyboardState extends State<GameKeyboard> {
         setState(() {
           dogru = dogru + 1;
           puan();
+          sol();
         });
 
         print(dogru);
         return true;
-      }else {
+      } else {
         setState(() {
           dogru = dogru - 1;
           yanlis = yanlis + 1;
@@ -102,7 +103,7 @@ class _GameKeyboardState extends State<GameKeyboard> {
               ilkEleman += 8;
             });
           });
-
+          sol();
           yanlis = 0;
         }
         print("Yanlış ");
@@ -124,7 +125,7 @@ class _GameKeyboardState extends State<GameKeyboard> {
             ilkEleman += 8;
           });
         });
-
+        sol();
         yanlis = 0;
       }
       print("Yanlış ");
@@ -157,27 +158,34 @@ class _GameKeyboardState extends State<GameKeyboard> {
     });
   }
 
-  void puan(){
-    List<String> points = ["aeiklnrt", "ımosu", "bdüy", "cçşz", "hgp","föv", "ğ", "j"];
+  void puan() {
+    List<String> points = [
+      "aeiklnrt",
+      "ımosu",
+      "bdüy",
+      "cçşz",
+      "hgp",
+      "föv",
+      "ğ",
+      "j"
+    ];
 
     for (int i = 0; i < widget.game.user_word.length; i++) {
-      if(points[0].contains(widget.game.user_word[i]))
-        toplam_puan +=1;
-      else if(points[1].contains(widget.game.user_word[i]))
-        toplam_puan +=2;
-      else if(points[2].contains(widget.game.user_word[i]))
-        toplam_puan +=3;
-      else if(points[3].contains(widget.game.user_word[i]))
-        toplam_puan +=4;
-      else if(points[4].contains(widget.game.user_word[i]))
-        toplam_puan +=5;
-      else if(points[5].contains(widget.game.user_word[i]))
-        toplam_puan +=7;
-      else if(points[6].contains(widget.game.user_word[i]))
-        toplam_puan +=8;
-      else if(points[7].contains(widget.game.user_word[i]))
-        toplam_puan +=10;
-
+      if (points[0].contains(widget.game.user_word[i]))
+        toplam_puan += 1;
+      else if (points[1].contains(widget.game.user_word[i]))
+        toplam_puan += 2;
+      else if (points[2].contains(widget.game.user_word[i]))
+        toplam_puan += 3;
+      else if (points[3].contains(widget.game.user_word[i]))
+        toplam_puan += 4;
+      else if (points[4].contains(widget.game.user_word[i]))
+        toplam_puan += 5;
+      else if (points[5].contains(widget.game.user_word[i]))
+        toplam_puan += 7;
+      else if (points[6].contains(widget.game.user_word[i]))
+        toplam_puan += 8;
+      else if (points[7].contains(widget.game.user_word[i])) toplam_puan += 10;
     }
   }
 }
