@@ -7,6 +7,7 @@ List<int> yukseklik = [3, 3, 3, 3, 3, 3, 3, 3];
 Color _backgroundColor = Colors.white;
 int dogru = 0;
 int yanlis = 0;
+int toplam_puan = 0;
 
 class GamePage extends StatefulWidget {
   GamePage(this.game, this.letter, {Key? key}) : super(key: key);
@@ -155,6 +156,7 @@ class _GamePageState extends State<GamePage> {
           style: TextStyle(fontSize: 20),
         ),
         Text("yanlis   " + yanlis.toString()),
+        Text("toplam_puan   " + toplam_puan.toString()),
       ],
     );
   }

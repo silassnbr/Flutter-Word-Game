@@ -84,9 +84,32 @@ class _GameKeyboardState extends State<GameKeyboard> {
         print("DOĞRU ");
         setState(() {
           dogru = dogru + 1;
+          puan();
         });
+
         print(dogru);
         return true;
+      }else {
+        setState(() {
+          dogru = dogru - 1;
+          yanlis = yanlis + 1;
+          print("88888888888    " + yanlis.toString());
+        });
+        int ilkEleman = 0;
+        if (yanlis == 3) {
+          harfler.setRange(0, 8, falling_letters);
+          Timer.periodic(Duration(seconds: 1), (timer) {
+            setState(() {
+              kaydir(ilkEleman);
+              ilkEleman += 8;
+            });
+          });
+
+          yanlis = 0;
+        }
+        print("Yanlış ");
+
+        return false;
       }
     } else {
       setState(() {
@@ -134,5 +157,29 @@ class _GameKeyboardState extends State<GameKeyboard> {
       widget.game.secilme = List.filled(80, false);
       print("onayyy");
     });
+  }
+
+  void puan(){
+    List<String> points = ["aeiklnrt", "ımosu", "bdüy", "cçşz", "hgp","föv", "ğ", "j"];
+
+    for (int i = 0; i < widget.game.user_word.length; i++) {
+      if(points[0].contains(widget.game.user_word[i]))
+        toplam_puan +=1;
+      else if(points[1].contains(widget.game.user_word[i]))
+        toplam_puan +=2;
+      else if(points[2].contains(widget.game.user_word[i]))
+        toplam_puan +=3;
+      else if(points[3].contains(widget.game.user_word[i]))
+        toplam_puan +=4;
+      else if(points[4].contains(widget.game.user_word[i]))
+        toplam_puan +=5;
+      else if(points[5].contains(widget.game.user_word[i]))
+        toplam_puan +=7;
+      else if(points[6].contains(widget.game.user_word[i]))
+        toplam_puan +=8;
+      else if(points[7].contains(widget.game.user_word[i]))
+        toplam_puan +=10;
+
+    }
   }
 }
