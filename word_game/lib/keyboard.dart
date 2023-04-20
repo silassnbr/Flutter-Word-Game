@@ -66,7 +66,7 @@ class _GameKeyboardState extends State<GameKeyboard> {
     );
   }
 
-  void sag() async {
+  Future<bool> sag() async {
     String secilen = "";
     WidgetsFlutterBinding.ensureInitialized();
     //String searchQuery = _searchController.text;
@@ -83,13 +83,13 @@ class _GameKeyboardState extends State<GameKeyboard> {
           dogru = dogru + 1;
         });
         print(dogru);
-        //return true;
+        return true;
       } else {
         setState(() {
           dogru = dogru - 1;
         });
         print("Yanlış ");
-        //return false;
+        return false;
       }
     }
     else {
@@ -97,7 +97,7 @@ class _GameKeyboardState extends State<GameKeyboard> {
         dogru = dogru - 1;
       });
       print("Yanlış ");
-      //return false;
+      return false;
     }
   }
 
