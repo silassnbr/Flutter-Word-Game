@@ -68,14 +68,12 @@ class _GameKeyboardState extends State<GameKeyboard> {
     );
   }
 
-  List<String> falling_letters = ["a", "b", "a", "b", "a", "b", "a", "b"];
+
   Future<bool?> sag() async {
     String secilen = "";
     WidgetsFlutterBinding.ensureInitialized();
-    //String searchQuery = _searchController.text;
-    //print("aranacaklar ${widget.game.filteredWordsList}");
+    List<String> falling_letters = widget.letter.randomLetter(4, 4);// sesli sessiz harf sayısı
     print("user_word ${widget.game.user_word}");
-    //if(searchQuery.length == widget.game.filteredWordsList[0].length) {
     for (int i = 0; i < widget.game.user_word.length; i++) {
       secilen += widget.game.user_word[i];
     }

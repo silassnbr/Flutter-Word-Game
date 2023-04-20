@@ -82,7 +82,6 @@ class WorldeGame {
   // }
 }
 
-List<String> random_letter = [];
 
 class Letter {
   int adet_sesli = 12;
@@ -103,7 +102,19 @@ class Letter {
     return letter;
   }
 
+  randomLetter(int sesli, int sessiz) {
+    List<String> random_letters = [];
+    sesli_harfler.shuffle();
+    sessiz_harfler.shuffle();
+    random_letters =
+        sesli_harfler.sublist(0, sesli) + sessiz_harfler.sublist(0, sessiz);
+
+    random_letters.shuffle();
+    return random_letters;
+  }
+
   static shuffleLetters() {
+    List<String> random_letter = [];
     sesli_harfler.shuffle();
     sessiz_harfler.shuffle();
     random_letter =

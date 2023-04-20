@@ -67,10 +67,10 @@ class _GamePageState extends State<GamePage> {
   void changeColor() {
     Future.delayed(Duration(seconds: 5)).then((_) {
       setState(() {
-        int rand = Random().nextInt(10);
+        //int rand = Random().nextInt(10);
         int randSut = Random().nextInt(8);
 
-        harfler[randSut] = rand.toString();
+        harfler[randSut] = widget.letter.randomLetter(1, 0)[0];
         _asagi(randSut);
       });
       changeColor();
