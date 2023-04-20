@@ -53,7 +53,7 @@ class _GamePageState extends State<GamePage> {
     if(temp == 0)
       row_control();
 
-    Future.delayed(Duration(milliseconds: 400)).then((_) {
+    Future.delayed(Duration(seconds: 1)).then((_) {
       setState(() {
         if (_currentIndex < 72) {
           // move the last 8 items to the beginning of the list
@@ -78,7 +78,7 @@ class _GamePageState extends State<GamePage> {
       });
 
       for(int i =0; i < count; i++){
-        if(!hit_floor(i))
+        if(!hit_floor(random_row))
           break;
       }
       //print("hit_floor ${hit_floor(count)}");

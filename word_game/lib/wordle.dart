@@ -50,7 +50,7 @@ class WorldeGame {
     user_word.add(word);
     satir.add(row);
     sutun.add(col);
-    print("eklendi ${user_word}");
+    //print("eklendi ${user_word}");
     // search(user_word.toLowerCase());
     return user_word;
   }
