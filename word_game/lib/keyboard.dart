@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:word_game/gamePage.dart';
+import 'package:word_game/gameScreen.dart';
 import 'package:word_game/wordle.dart';
 
 class GameKeyboard extends StatefulWidget {
@@ -65,18 +66,49 @@ class _GameKeyboardState extends State<GameKeyboard> {
     );
   }
 
-  Future<bool> sag() async {
+  Future<bool?> sag() async {
+    String secilen = "";
     WidgetsFlutterBinding.ensureInitialized();
     //String searchQuery = _searchController.text;
     //print("aranacaklar ${widget.game.filteredWordsList}");
     print("user_word ${widget.game.user_word}");
     //if(searchQuery.length == widget.game.filteredWordsList[0].length) {
-    if (widget.game.user_word.length ==
-        widget.game.filteredWordsList[0].length) {
-      print("DOĞRU ");
-      return true;
+    for (int i = 0; i < widget.game.user_word.length; i++) {
+      secilen += widget.game.user_word[i];
+    }
+    if (!widget.game.filteredWordsList.isEmpty) {
+      if (secilen.length == widget.game.filteredWordsList[0].length) {
+        print("DOĞRU ");
+        setState(() {
+          dogru = dogru + 1;
+        });
+        print(dogru);
+        return true;
+      }
+      else {
+        setState(() {
+          dogru = dogru - 1;
+          yanlis = yanlis + 1;
+        });
+        print("Yanlış ");
+
+      }
     } else {
+      setState(() {
+        dogru = dogru - 1;
+        yanlis = yanlis + 1;
+      });
+/*      if (yanlis == 3) {
+        showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+                  title: const Text("3 yanlıs yaptınızzzz"),
+                  content: Text("3 yanlısss"),
+                ));
+        yanlis = 0;
+      }*/
       print("Yanlış ");
+
       return false;
     }
   }

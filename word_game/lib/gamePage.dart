@@ -1,9 +1,12 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'dart:math';
 import 'package:word_game/keyboard.dart';
 import 'package:word_game/wordle.dart';
+
+List<int> yukseklik = [3, 3, 3, 3, 3, 3, 3, 3];
+Color _backgroundColor = Colors.white;
+int dogru = 0;
+int yanlis = 0;
 
 class GamePage extends StatefulWidget {
   GamePage(this.game, this.letter, {Key? key}) : super(key: key);
@@ -14,10 +17,7 @@ class GamePage extends StatefulWidget {
   State<GamePage> createState() => _GamePageState();
 }
 
-//List<bool> secilme = [];
-
 class _GamePageState extends State<GamePage> {
-
   int _currentIndex = 0;
   int sat = 0;
   int temp = 0;
@@ -30,9 +30,11 @@ class _GamePageState extends State<GamePage> {
 
   void row_control(){
 
-    if(temp%2 == 0) { // temp < 3
+    if(temp < 3 || yanlis >= 3) { // temp < 3
       count = 8;
       random_row = 0;
+      if(temp >= 3)
+        yanlis = 0;
     } else {
       count = 1;
       var random = Random();
@@ -45,12 +47,13 @@ class _GamePageState extends State<GamePage> {
     temp +=1;
   }
   bool flag = false;
+
   void _startScrolling() {
 
     if(temp == 0)
       row_control();
 
-    Future.delayed(Duration(milliseconds: 1000)).then((_) {
+    Future.delayed(Duration(milliseconds: 400)).then((_) {
       setState(() {
         if (_currentIndex < 72) {
           // move the last 8 items to the beginning of the list
@@ -61,14 +64,13 @@ class _GamePageState extends State<GamePage> {
               remove_animation.add(_currentIndex + i + random_row);
             }
           }
-          print(remove_animation);
           // clear the last 8 items
           for (int i = 0; i < remove_animation.length; i++) {
-             harfler[remove_animation[i]] = "";
+            harfler[remove_animation[i]] = "";
           }
           remove_animation = [];
           _currentIndex = _currentIndex + 8;
-  /*        if(_currentIndex == 80)
+          /*        if(_currentIndex == 80)
             flag = true;*/
 
           // update the current index to point to the new first item
@@ -97,16 +99,30 @@ class _GamePageState extends State<GamePage> {
     }
     else
       flag = false;
-      return false;
+    return false;
 
+  }
+
+  void changeColor() {
+    Future.delayed(Duration(seconds: 5)).then((_) {
+      setState(() {
+        int rand = Random().nextInt(10);
+        int randSut = Random().nextInt(8);
+
+        harfler[randSut] = rand.toString();
+        //_asagi(randSut);
+      });
+      changeColor();
+    });
   }
 
   @override
-
   void initState() {
     super.initState();
     _startScrolling();
+    //changeColor();
   }
+
   @override
   Widget build(BuildContext context) {
     GameKeyboard bord = GameKeyboard(widget.game, widget.letter);
@@ -128,19 +144,15 @@ class _GamePageState extends State<GamePage> {
                       setState(() {
                         widget.game.insertWord(harfler[rowIndex * 8 + colIndex],
                             rowIndex, colIndex);
-                        print(rowIndex * 8 + colIndex);
                       });
                     } else {
                       setState(() {
                         widget.game.secilme[rowIndex * 8 + colIndex] = false;
                         widget.game.deleteWord(harfler[rowIndex * 8 + colIndex],
                             rowIndex, colIndex);
-                        print(rowIndex * 8 + colIndex);
                       });
                     }
-
-                    //widget.game.search(widget.game.user_word);
-                    print(widget.game.user_word);
+                    widget.game.search();
                   },
                   child: Container(
                     padding: const EdgeInsets.all(2.0),
@@ -149,7 +161,7 @@ class _GamePageState extends State<GamePage> {
                     margin: const EdgeInsets.all(2.0),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8.0),
-                        color: Colors.amber.shade200),
+                        color: _backgroundColor),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -182,11 +194,9 @@ class _GamePageState extends State<GamePage> {
           "sutun  " + widget.game.sutun.toString(),
           style: TextStyle(fontSize: 20),
         ),
+        Text("Dogru sayisi   " + dogru.toString()),
+        Text("Yanlis sayisi   " + yanlis.toString()),
       ],
     );
-  }
-
-  void readletter() {
-    print("read letter");
   }
 }

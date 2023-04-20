@@ -28,6 +28,8 @@ List<String> sessiz_harfler = [
 List<String> harfler = List.filled(80, "");
 
 class WorldeGame {
+  List<String> kelimeler = ["as", "es", "ek", "el"];
+
   //setting the game variables
   int rowId = 0;
   int letterId = 0;
@@ -64,18 +66,23 @@ class WorldeGame {
     return user_word;
   }
 
-  // void search(value) {
-  //   filteredWordsList =
-  //       wordsList.where((item) => item.startsWith('$value')).toList();
-  //   print(filteredWordsList.length);
-  //   user_word = value; //TextField için
-  // }
+   void search() {
+     String secilen = "";
+     for (int i = 0; i < user_word.length; i++) {
+       secilen += user_word[i];
+     }
+     filteredWordsList =
+         wordsList.where((item) => item.startsWith('$secilen')).toList();
+     print(filteredWordsList.length);
+     //user_word = value; //TextField için
+   }
   //checking world
   // bool checkWordExist(String word) {
   //   return word_list.contains(word);
   // }
 }
 
+List<String> random_letter = [];
 class Letter {
   int adet_sesli = 12;
   int adet_sessiz = 12;
@@ -111,13 +118,13 @@ class Letter {
 
   Letter()
       : wordleBoard = List.generate(
-          10,
-          (index) {
-            //shuffleSesliHarfler();
-            return List.generate(
-              8,
-              (indexx) => harfler[indexx + index * 8],
-            );
-          },
-        );
+    10,
+        (index) {
+      //shuffleSesliHarfler();
+      return List.generate(
+        8,
+            (indexx) => harfler[indexx + index * 8],
+      );
+    },
+  );
 }
