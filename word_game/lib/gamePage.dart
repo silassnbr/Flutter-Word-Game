@@ -154,7 +154,7 @@ class _GamePageState extends State<GamePage> {
           "sutun  " + widget.game.sutun.toString(),
           style: TextStyle(fontSize: 20),
         ),
-        Text("Dogru sayisi   " + dogru.toString()),
+        Text("yanlis   " + yanlis.toString()),
       ],
     );
   }

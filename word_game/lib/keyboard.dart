@@ -97,7 +97,7 @@ class _GameKeyboardState extends State<GameKeyboard> {
       int ilkEleman = 0;
       if (yanlis == 3) {
         harfler.setRange(0, 8, falling_letters);
-        Timer.periodic(Duration(milliseconds: 100), (timer) {
+        Timer.periodic(Duration(seconds: 1), (timer) {
           setState(() {
             kaydir(ilkEleman);
             ilkEleman += 8;
