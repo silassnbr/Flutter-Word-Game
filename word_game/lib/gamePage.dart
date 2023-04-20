@@ -1,13 +1,11 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'dart:math';
 import 'package:word_game/keyboard.dart';
-import 'package:word_game/main.dart';
 import 'package:word_game/wordle.dart';
 
 List<int> yukseklik = [3, 3, 3, 3, 3, 3, 3, 3];
 Color _backgroundColor = Colors.white;
+int dogru = 0;
 
 class GamePage extends StatefulWidget {
   GamePage(this.game, this.letter, {Key? key}) : super(key: key);
@@ -18,42 +16,22 @@ class GamePage extends StatefulWidget {
   State<GamePage> createState() => _GamePageState();
 }
 
-//List<bool> secilme = [];
-
 class _GamePageState extends State<GamePage> {
-  // void kaydirma() async {
-  //   setState(() {
-  //     harfler[0] = "a";
-  //     harfler[8] = "1";
-  //   });
-  // }
-
-  // void initState() {
-  //   super.initState();
-  //   kaydirma();
-  //   print("kaydirma");
-  // }
-
   int _currentIndex = 0;
   int sat = 0;
   void _startScrolling() {
     Future.delayed(Duration(milliseconds: 100)).then((_) {
       setState(() {
         if (_currentIndex < harfler.length - 27) {
-          print(harfler);
-          // move the last 8 items to the beginning of the list
           for (int i = 0; i < 8; i++) {
             harfler[_currentIndex + i + 24] = harfler[_currentIndex + 16 + i];
             harfler[_currentIndex + i + 16] = harfler[_currentIndex + 8 + i];
             harfler[_currentIndex + i + 8] = harfler[_currentIndex + i];
           }
-          // clear the last 8 items
           for (int i = _currentIndex; i < _currentIndex + 8; i++) {
             harfler[i] = "";
           }
           _currentIndex = _currentIndex + 8;
-
-          // update the current index to point to the new first item
         }
       });
       _startScrolling();
@@ -69,6 +47,14 @@ class _GamePageState extends State<GamePage> {
           harfler[a] = "";
           a = a + 8;
           i++;
+          // if (harfler[a] != "") {
+          //   print("dolduuu");
+          //   showDialog(
+          //       context: context,
+          //       builder: (context) => AlertDialog(
+          //             title: Text("aaa"),
+          //           ));
+          // }
           // update the current index to point to the new first item
         }
       });
@@ -80,7 +66,7 @@ class _GamePageState extends State<GamePage> {
     Future.delayed(Duration(seconds: 5)).then((_) {
       setState(() {
         int rand = Random().nextInt(10);
-        int randSut = Random().nextInt(7);
+        int randSut = Random().nextInt(8);
 
         harfler[randSut] = rand.toString();
         _asagi(randSut);
@@ -117,19 +103,14 @@ class _GamePageState extends State<GamePage> {
                       setState(() {
                         widget.game.insertWord(harfler[rowIndex * 8 + colIndex],
                             rowIndex, colIndex);
-                        print(rowIndex * 8 + colIndex);
                       });
                     } else {
                       setState(() {
                         widget.game.secilme[rowIndex * 8 + colIndex] = false;
                         widget.game.deleteWord(harfler[rowIndex * 8 + colIndex],
                             rowIndex, colIndex);
-                        print(rowIndex * 8 + colIndex);
                       });
                     }
-
-                    //widget.game.search(widget.game.user_word);
-                    print(widget.game.user_word);
                   },
                   child: Container(
                     padding: const EdgeInsets.all(2.0),
@@ -171,11 +152,8 @@ class _GamePageState extends State<GamePage> {
           "sutun  " + widget.game.sutun.toString(),
           style: TextStyle(fontSize: 20),
         ),
+        Text("Dogru sayisi   " + dogru.toString()),
       ],
     );
-  }
-
-  void readletter() {
-    print("read letter");
   }
 }

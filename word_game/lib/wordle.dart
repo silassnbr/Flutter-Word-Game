@@ -28,6 +28,8 @@ List<String> sessiz_harfler = [
 List<String?> harfler = List.filled(80, "");
 
 class WorldeGame {
+  List<String> kelimeler = ["as", "es", "ek", "el"];
+
   //setting the game variables
   int rowId = 0;
   int letterId = 0;

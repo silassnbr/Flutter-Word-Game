@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:word_game/gamePage.dart';
+import 'package:word_game/gameScreen.dart';
 import 'package:word_game/wordle.dart';
 
 class GameKeyboard extends StatefulWidget {
@@ -66,16 +67,27 @@ class _GameKeyboardState extends State<GameKeyboard> {
   }
 
   Future<bool> sag() async {
+    String secilen = "";
     WidgetsFlutterBinding.ensureInitialized();
     //String searchQuery = _searchController.text;
     //print("aranacaklar ${widget.game.filteredWordsList}");
     print("user_word ${widget.game.user_word}");
     //if(searchQuery.length == widget.game.filteredWordsList[0].length) {
-    if (widget.game.user_word.length ==
-        widget.game.filteredWordsList[0].length) {
+    for (int i = 0; i < widget.game.user_word.length; i++) {
+      secilen += widget.game.user_word[i];
+    }
+    print("-------------------------");
+    print(secilen);
+    if (widget.game.kelimeler.contains(secilen)) {
+      setState(() {
+        dogru = dogru + 1;
+      });
       print("DOĞRU ");
       return true;
     } else {
+      setState(() {
+        dogru = dogru - 1;
+      });
       print("Yanlış ");
       return false;
     }
