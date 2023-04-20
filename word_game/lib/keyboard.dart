@@ -96,6 +96,7 @@ class _GameKeyboardState extends State<GameKeyboard> {
           adet_sessiz -= secilen_sessiz;
           adet_harf -= secilen.length;
           puan();
+          dogru_kaydir();
           sol();
         });
 
@@ -158,6 +159,29 @@ class _GameKeyboardState extends State<GameKeyboard> {
         }
       }
     });
+  }
+
+  void dogru_kaydir() async{
+    widget.game.satir;
+    widget.game.sutun;
+    int satir;
+    int sutun;
+    for(int i=0; i< widget.game.satir.length; i++){
+
+      satir = widget.game.satir[i];
+      sutun = widget.game.sutun[i];
+      print("silinen ${harfler[(satir) * 8 +sutun]}");
+
+      for(int i=0; i<satir; satir--){
+        harfler[(satir) * 8 +sutun] ="" ;
+        harfler[(satir) * 8 +sutun] = harfler[(satir - 1) * 8 +sutun];
+        print("alta yaz ${harfler[(satir - 1) * 8 +sutun]}");
+        harfler[(satir - 1) * 8 +sutun] = "";
+        //satir = satir -1;
+      }
+
+    }
+
   }
 
   void sol() {
