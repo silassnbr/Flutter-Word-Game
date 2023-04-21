@@ -9,6 +9,7 @@ Color _backgroundColor = Colors.white;
 int dogru = 0;
 int yanlis = 0;
 int toplam_puan = 0;
+int inmeZaman = 5;
 
 class GamePage extends StatefulWidget {
   GamePage(this.game, this.letter, {Key? key}) : super(key: key);
@@ -71,7 +72,7 @@ class _GamePageState extends State<GamePage> {
   }
 
   void changeColor() {
-    Future.delayed(Duration(seconds: 5)).then((_) {
+    Future.delayed(Duration(seconds: inmeZaman)).then((_) {
       setState(() {
         //int rand = Random().nextInt(10);
         int randSut = Random().nextInt(8);

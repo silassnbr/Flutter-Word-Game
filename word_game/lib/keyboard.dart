@@ -86,6 +86,19 @@ class _GameKeyboardState extends State<GameKeyboard> {
         setState(() {
           dogru = dogru + 1;
           puan();
+          if (toplam_puan < 100) {
+            inmeZaman = 5;
+          } else if (toplam_puan >= 100 && toplam_puan < 200) {
+            inmeZaman = 4;
+          } else if (toplam_puan >= 200 && toplam_puan < 300) {
+            inmeZaman = 3;
+          } else if (toplam_puan >= 300 && toplam_puan < 400) {
+            inmeZaman = 2;
+          } else if (toplam_puan >= 400) {
+            inmeZaman = 1;
+          }
+          print("*******************************************");
+          print(inmeZaman);
           dogru_kaydir();
           sol();
         });
@@ -96,7 +109,7 @@ class _GameKeyboardState extends State<GameKeyboard> {
         setState(() {
           dogru = dogru - 1;
           yanlis = yanlis + 1;
-          print("88888888888    " + yanlis.toString());
+          //print("88888888888    " + yanlis.toString());
         });
         int ilkEleman = 0;
         if (yanlis == 3) {
@@ -113,7 +126,7 @@ class _GameKeyboardState extends State<GameKeyboard> {
           sol();
           yanlis = 0;
         }
-        print("Yanlış ");
+        //print("Yanlış ");
 
         return false;
       }
@@ -139,7 +152,7 @@ class _GameKeyboardState extends State<GameKeyboard> {
         sol();
         yanlis = 0;
       }
-      print("Yanlış ");
+      //print("Yanlış ");
 
       return false;
     }
@@ -175,7 +188,7 @@ class _GameKeyboardState extends State<GameKeyboard> {
     for (int i = 0; i < widget.game.satir.length; i++) {
       satir = widget.game.satir[i];
       sutun = widget.game.sutun[i];
-      print("silinen ${harfler[(satir) * 8 + sutun]}");
+      //print("silinen ${harfler[(satir) * 8 + sutun]}");
       harfler[(satir) * 8 + sutun] = "";
       for (int i = anlik_yukseklik[sutun]; (9 - i) < satir; satir--) {
 /*        if(satir == (9-yukseklik[sutun])+1){
@@ -183,7 +196,7 @@ class _GameKeyboardState extends State<GameKeyboard> {
         }*/
         //harfler[(satir) * 8 +sutun] ="" ;
         harfler[(satir) * 8 + sutun] = harfler[(satir - 1) * 8 + sutun];
-        print("alta yaz ${harfler[(satir - 1) * 8 + sutun]}");
+        //print("alta yaz ${harfler[(satir - 1) * 8 + sutun]}");
         harfler[(satir - 1) * 8 + sutun] = "";
       }
       anlik_yukseklik[sutun] = anlik_yukseklik[sutun] - 1;
@@ -197,7 +210,7 @@ class _GameKeyboardState extends State<GameKeyboard> {
       widget.game.satir = [];
       widget.game.sutun = [];
       widget.game.secilme = List.filled(80, false);
-      print("onayyy");
+      //print("onayyy");
     });
   }
 
@@ -215,11 +228,11 @@ class _GameKeyboardState extends State<GameKeyboard> {
 
     for (int i = 0; i < widget.game.user_word.length; i++) {
       if (points[0].contains(widget.game.user_word[i]))
-        toplam_puan += 1;
+        toplam_puan += 50;
       else if (points[1].contains(widget.game.user_word[i]))
-        toplam_puan += 2;
+        toplam_puan += 10;
       else if (points[2].contains(widget.game.user_word[i]))
-        toplam_puan += 3;
+        toplam_puan += 10;
       else if (points[3].contains(widget.game.user_word[i]))
         toplam_puan += 4;
       else if (points[4].contains(widget.game.user_word[i]))
