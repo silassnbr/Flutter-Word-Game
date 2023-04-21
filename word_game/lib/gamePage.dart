@@ -59,15 +59,14 @@ class _GamePageState extends State<GamePage> {
           //           ));
           // }
           // update the current index to point to the new first item
-        }
-        else{
+        } else {
           anlik_yukseklik[randSut] = anlik_yukseklik[randSut] + 1;
-          a=72;
+          a = 72;
         }
       });
-      if(a<72) {
+      if (a < 72) {
         _asagi(a, randSut);
-    }
+      }
     });
   }
 
@@ -133,7 +132,9 @@ class _GamePageState extends State<GamePage> {
                     margin: const EdgeInsets.all(2.0),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8.0),
-                        color: _backgroundColor),
+                        color: widget.game.secilme[rowIndex * 8 + colIndex]
+                            ? Colors.purple.shade600
+                            : _backgroundColor),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
