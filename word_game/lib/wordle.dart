@@ -92,7 +92,8 @@ class Letter {
     String letter="";
     var random = Random();
     var randomNumber;
-    if (adet_sesli / adet_harf < 0.50) { //min sesli harf oranı
+
+    if (adet_sesli / adet_harf < 0.5) { //min sesli harf oranı
       randomNumber = random.nextInt(10);
       letter = sesli_harfler[randomNumber];
       adet_sesli += 1;
@@ -101,7 +102,9 @@ class Letter {
       letter = sessiz_harfler[randomNumber];
       adet_sessiz += 1;
     }
-    adet_harf += 1;
+
+    adet_harf =adet_sesli + adet_sessiz;
+
     return letter;
   }
 

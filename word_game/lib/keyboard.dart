@@ -164,22 +164,34 @@ class _GameKeyboardState extends State<GameKeyboard> {
     widget.game.sutun;
     int satir;
     int sutun;
+    String? temp = "";
+
+/*    for(int i=0; i< widget.game.satir.length; i++){
+      satir = widget.game.satir[i];
+      sutun = widget.game.sutun[i];
+      harfler[(satir) * 8 +sutun] = "";
+      temp = harfler[(10 - yukseklik[sutun])*8 + sutun];
+      harfler[(10 - yukseklik[sutun])*8 + sutun] = "";
+    }*/
     for(int i=0; i< widget.game.satir.length; i++){
 
       satir = widget.game.satir[i];
       sutun = widget.game.sutun[i];
       print("silinen ${harfler[(satir) * 8 +sutun]}");
+      harfler[(satir) * 8 +sutun] ="" ;
+      for(int i=anlik_yukseklik[sutun]; (9- i) <satir; satir--){
 
-      for(int i=yukseklik[sutun]; (9- i) <satir; satir--){
-        if(satir==0)
+        if(satir==0)// oyun bitmiştir
           break;
-        harfler[(satir) * 8 +sutun] ="" ;
+/*        if(satir == (9-yukseklik[sutun])+1){
+          harfler[(satir) * 8 +sutun] = temp;
+        }*/
+        //harfler[(satir) * 8 +sutun] ="" ;
         harfler[(satir) * 8 +sutun] = harfler[(satir - 1) * 8 +sutun];
         print("alta yaz ${harfler[(satir - 1) * 8 +sutun]}");
         harfler[(satir - 1) * 8 +sutun] = "";
       }
-      yukseklik[sutun] = yukseklik[sutun] - 1;
-
+      anlik_yukseklik[sutun] = anlik_yukseklik[sutun] - 1;
 
     }
 

@@ -4,6 +4,7 @@ import 'package:word_game/keyboard.dart';
 import 'package:word_game/wordle.dart';
 
 List<int> yukseklik = [3, 3, 3, 3, 3, 3, 3, 3];
+List<int> anlik_yukseklik = [3, 3, 3, 3, 3, 3, 3, 3];
 Color _backgroundColor = Colors.white;
 int dogru = 0;
 int yanlis = 0;
@@ -41,7 +42,7 @@ class _GamePageState extends State<GamePage> {
   }
 
   int i = 0;
-  void _asagi(int a) {
+  void _asagi(int a, int randSut) {
     Future.delayed(Duration(seconds: 1)).then((_) {
       setState(() {
         if (harfler[a + 8] == "") {
@@ -59,8 +60,14 @@ class _GamePageState extends State<GamePage> {
           // }
           // update the current index to point to the new first item
         }
+        else{
+          anlik_yukseklik[randSut] = anlik_yukseklik[randSut] + 1;
+          a=72;
+        }
       });
-      _asagi(a);
+      if(a<72) {
+        _asagi(a, randSut);
+    }
     });
   }
 
@@ -73,7 +80,9 @@ class _GamePageState extends State<GamePage> {
         harfler[randSut] = widget.letter.ratio_check();
         print("*************************    ");
         print(yukseklik);
-        _asagi(randSut);
+        print("***********anlik_yukseklik**************    ");
+        print(anlik_yukseklik);
+        _asagi(randSut, randSut);
       });
       changeColor();
     });
