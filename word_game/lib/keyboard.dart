@@ -228,11 +228,11 @@ class _GameKeyboardState extends State<GameKeyboard> {
 
     for (int i = 0; i < widget.game.user_word.length; i++) {
       if (points[0].contains(widget.game.user_word[i]))
-        toplam_puan += 50;
+        toplam_puan += 1;
       else if (points[1].contains(widget.game.user_word[i]))
-        toplam_puan += 10;
+        toplam_puan += 2;
       else if (points[2].contains(widget.game.user_word[i]))
-        toplam_puan += 10;
+        toplam_puan += 3;
       else if (points[3].contains(widget.game.user_word[i]))
         toplam_puan += 4;
       else if (points[4].contains(widget.game.user_word[i]))
