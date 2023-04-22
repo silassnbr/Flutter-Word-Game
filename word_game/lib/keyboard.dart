@@ -33,7 +33,7 @@ class _GameKeyboardState extends State<GameKeyboard> {
   void initState() {
     super.initState();
     _loadWords();
-    print("merhabaa");
+
   }
 
   @override
@@ -183,26 +183,32 @@ class _GameKeyboardState extends State<GameKeyboard> {
   void dogru_kaydir() async {
     widget.game.satir;
     widget.game.sutun;
+    
     int satir;
     int sutun;
-    String? temp = "";
+    List<int> sortedList = List.generate(widget.game.satir.length, (index) => index)
+      ..sort((a, b) => widget.game.satir[a].compareTo(widget.game.satir[b]));
+
+    List<List<int>> matrix = sortedList.map((index) => [widget.game.satir[index], widget.game.sutun[index]]).toList();
 
     for(int i=0; i< widget.game.satir.length; i++){
-      satir = widget.game.satir[i];
-      sutun = widget.game.sutun[i];
-      harfler[(satir) * 8 +sutun] = "";
+      satir = matrix[i][0];
+      sutun = matrix[i][1];
+      //harfler[(satir) * 8 +sutun] = "";
+      yukseklik[sutun] -=1;
     }
 
     for (int i = 0; i < widget.game.satir.length; i++) {
-      satir = widget.game.satir[i];
-      sutun = widget.game.sutun[i];
+      satir = matrix[i][0];
+      sutun = matrix[i][1];
 
-      for (int i = anlik_yukseklik[sutun]; (9 - i) < satir; satir--) {
+      while( harfler[ ((satir - 1)* 8 + sutun)] != "") {
 
+        harfler[(satir) * 8 +sutun] = "";
         harfler[(satir) * 8 +sutun] = harfler[(satir - 1) * 8 +sutun];
         print("alta yaz ${harfler[(satir - 1) * 8 +sutun]}");
         harfler[(satir - 1) * 8 +sutun] = "";
-
+        satir--;
       }
       anlik_yukseklik[sutun] = anlik_yukseklik[sutun] - 1;
     }

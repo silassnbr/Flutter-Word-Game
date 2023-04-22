@@ -63,6 +63,8 @@ class _GamePageState extends State<GamePage> {
         } else {
           anlik_yukseklik[randSut] = anlik_yukseklik[randSut] + 1;
           a = 72;
+          print("***********anlik_yukseklik**************    ");
+          print(anlik_yukseklik);
         }
       });
       if (a < 72) {
@@ -78,10 +80,9 @@ class _GamePageState extends State<GamePage> {
         int randSut = Random().nextInt(8);
         yukseklik[randSut] = yukseklik[randSut] + 1;
         harfler[randSut] = widget.letter.ratio_check();
-        print("*************************    ");
-        print(yukseklik);
-        print("***********anlik_yukseklik**************    ");
-        print(anlik_yukseklik);
+        //print("*************************    ");
+        //print(yukseklik);
+
         _asagi(randSut, randSut);
       });
       changeColor();
