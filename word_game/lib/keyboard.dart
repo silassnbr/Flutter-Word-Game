@@ -109,7 +109,7 @@ class _GameKeyboardState extends State<GameKeyboard> {
         setState(() {
           dogru = dogru - 1;
           yanlis = yanlis + 1;
-          //print("88888888888    " + yanlis.toString());
+          print("88888888888    " + yanlis.toString());
         });
         int ilkEleman = 0;
         if (yanlis == 3) {
@@ -117,9 +117,12 @@ class _GameKeyboardState extends State<GameKeyboard> {
           for (int i = 0; i < 8; i++) {
             yukseklik[i] = yukseklik[i] + 1;
           }
+          print(yukseklik);
           Timer.periodic(Duration(seconds: 1), (timer) {
             setState(() {
-              kaydir(ilkEleman);
+              if (ilkEleman < 72) {
+                kaydir(ilkEleman);
+              }
               ilkEleman += 8;
             });
           });
@@ -145,7 +148,9 @@ class _GameKeyboardState extends State<GameKeyboard> {
         print(yukseklik);
         Timer.periodic(Duration(seconds: 1), (timer) {
           setState(() {
-            kaydir(ilkEleman);
+            if (ilkEleman < 72) {
+              kaydir(ilkEleman);
+            }
             ilkEleman += 8;
           });
         });
@@ -162,9 +167,13 @@ class _GameKeyboardState extends State<GameKeyboard> {
     setState(() {
       if (ilkEleman < 72) {
         for (int i = 0; i < 8; i++) {
-          if (harfler[ilkEleman + i + 8] == "") {
-            harfler[ilkEleman + i + 8] = harfler[ilkEleman + i];
-            harfler[ilkEleman + i] = "";
+          if(ilkEleman/8< 10 - anlik_yukseklik[i]) {
+            if (harfler[ilkEleman + i + 8] == "") {
+              harfler[ilkEleman + i + 8] = harfler[ilkEleman + i];
+              harfler[ilkEleman + i] = "";
+            } else {
+              anlik_yukseklik[i] +=1;
+            }
           }
         }
       }
@@ -178,26 +187,22 @@ class _GameKeyboardState extends State<GameKeyboard> {
     int sutun;
     String? temp = "";
 
-/*    for(int i=0; i< widget.game.satir.length; i++){
+    for(int i=0; i< widget.game.satir.length; i++){
       satir = widget.game.satir[i];
       sutun = widget.game.sutun[i];
       harfler[(satir) * 8 +sutun] = "";
-      temp = harfler[(10 - yukseklik[sutun])*8 + sutun];
-      harfler[(10 - yukseklik[sutun])*8 + sutun] = "";
-    }*/
+    }
+
     for (int i = 0; i < widget.game.satir.length; i++) {
       satir = widget.game.satir[i];
       sutun = widget.game.sutun[i];
-      //print("silinen ${harfler[(satir) * 8 + sutun]}");
-      harfler[(satir) * 8 + sutun] = "";
+
       for (int i = anlik_yukseklik[sutun]; (9 - i) < satir; satir--) {
-/*        if(satir == (9-yukseklik[sutun])+1){
-          harfler[(satir) * 8 +sutun] = temp;
-        }*/
-        //harfler[(satir) * 8 +sutun] ="" ;
-        harfler[(satir) * 8 + sutun] = harfler[(satir - 1) * 8 + sutun];
-        //print("alta yaz ${harfler[(satir - 1) * 8 + sutun]}");
-        harfler[(satir - 1) * 8 + sutun] = "";
+
+        harfler[(satir) * 8 +sutun] = harfler[(satir - 1) * 8 +sutun];
+        print("alta yaz ${harfler[(satir - 1) * 8 +sutun]}");
+        harfler[(satir - 1) * 8 +sutun] = "";
+
       }
       anlik_yukseklik[sutun] = anlik_yukseklik[sutun] - 1;
     }
