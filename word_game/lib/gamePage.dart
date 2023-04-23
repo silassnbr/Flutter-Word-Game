@@ -75,6 +75,9 @@ class _GamePageState extends State<GamePage> {
     yukseklik = [3, 3, 3, 3, 3, 3, 3, 3];
     toplam_puan = 0;
     flag = false;
+    inmeZaman = 5;
+    yanlis = 0;
+    harfler = List.filled(80, "");
     Navigator.of(context).push(MaterialPageRoute(
         builder: ((context) => MyHomePage(
               title: '',
@@ -94,8 +97,8 @@ class _GamePageState extends State<GamePage> {
           showDialog(
             context: context,
             builder: (_) => AlertDialog(
-              title: Text("Dikkat!"),
-              content: Text("Değer 4 oldu, işlemler durdurulacak."),
+              title: Text("OYUN BİTTİ !!!"),
+              content: Text(toplam_puan.toString()),
               actions: [
                 TextButton(
                   child: Text("Tamam"),

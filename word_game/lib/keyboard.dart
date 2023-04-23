@@ -59,6 +59,9 @@ class _GameKeyboardState extends State<GameKeyboard> {
     yukseklik = [3, 3, 3, 3, 3, 3, 3, 3];
     toplam_puan = 0;
     flag = false;
+    inmeZaman = 5;
+    yanlis = 0;
+    harfler = List.filled(80, "");
     Navigator.of(context).push(MaterialPageRoute(
         builder: ((context) => MyHomePage(
               title: '',
@@ -98,29 +101,6 @@ class _GameKeyboardState extends State<GameKeyboard> {
             yukseklik[widget.game.sutun[i]] =
                 yukseklik[widget.game.sutun[i]] - 1;
           }
-
-/*          for (int i = 0; i < 8; i++) {
-            if (yukseklik[i] == 10) {
-              showDialog(
-                context: context,
-                builder: (_) => AlertDialog(
-                  title: Text("Dikkat!"),
-                  content: Text("Değer 4 oldu, işlemler durdurulacak."),
-                  actions: [
-                    TextButton(
-                      child: Text("Tamam"),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                    ),
-                  ],
-                ),
-              );
-            }
-            print(yukseklik);
-            break;
-          }*/
-
           dogru = dogru + 1;
           puan();
           if (toplam_puan < 100) {
@@ -150,21 +130,18 @@ class _GameKeyboardState extends State<GameKeyboard> {
           harfler.setRange(0, 8, falling_letters);
           for (int i = 0; i < 8; i++) {
             yukseklik[i] = yukseklik[i] + 1;
-            if (yukseklik[i] == 8) {
+            if (yukseklik[i] == 10) {
               flag = true;
               //dispose();
               showDialog(
                 context: context,
                 builder: (_) => AlertDialog(
-                  title: Text("Dikkat!"),
-                  content: Text("Değer 4 oldu, işlemler durdurulacak."),
+                  title: Text("OYUN BİTTİ !!!"),
+                  content: Text(toplam_puan.toString()),
                   actions: [
                     TextButton(
                       child: Text("Tamam"),
                       onPressed: () {
-                        yukseklik = [3, 3, 3, 3, 3, 3, 3, 3];
-                        toplam_puan = 0;
-                        flag = false;
                         firstPage();
                       },
                     ),
@@ -209,14 +186,14 @@ class _GameKeyboardState extends State<GameKeyboard> {
         harfler.setRange(0, 8, falling_letters);
         for (int i = 0; i < 8; i++) {
           yukseklik[i] = yukseklik[i] + 1;
-          if (yukseklik[i] == 8) {
+          if (yukseklik[i] == 10) {
             flag = true;
             //dispose();
             showDialog(
               context: context,
               builder: (_) => AlertDialog(
-                title: Text("Dikkat!"),
-                content: Text("Değer 4 oldu, işlemler durdurulacak."),
+                title: Text("OYUN BİTTİ !!!"),
+                content: Text(toplam_puan.toString()),
                 actions: [
                   TextButton(
                     child: Text("Tamam"),
@@ -307,13 +284,11 @@ class _GameKeyboardState extends State<GameKeyboard> {
   }
 
   void sol() {
-    // _searchController.text="";
     setState(() {
       widget.game.user_word = [];
       widget.game.satir = [];
       widget.game.sutun = [];
       widget.game.secilme = List.filled(80, false);
-      //print("onayyy");
     });
   }
 
