@@ -80,8 +80,7 @@ class _GamePageState extends State<GamePage> {
             }
             break;
           }
-          print("***********anlik_yukseklik**************    ");
-          print(anlik_yukseklik);
+          print(yukseklik);
         }
       });
       if (a < 72) {

@@ -106,6 +106,7 @@ class _GameKeyboardState extends State<GameKeyboard> {
                 ),
               );
             }
+            print(yukseklik);
             break;
           }
 
@@ -132,7 +133,6 @@ class _GameKeyboardState extends State<GameKeyboard> {
         setState(() {
           dogru = dogru - 1;
           yanlis = yanlis + 1;
-          print("88888888888    " + yanlis.toString());
         });
         int ilkEleman = 0;
         if (yanlis == 3) {
@@ -157,6 +157,7 @@ class _GameKeyboardState extends State<GameKeyboard> {
                   ],
                 ),
               );
+              print(yukseklik);
             }
           }
           print(yukseklik);
@@ -179,7 +180,6 @@ class _GameKeyboardState extends State<GameKeyboard> {
       setState(() {
         dogru = dogru - 1;
         yanlis = yanlis + 1;
-        print("88888888888    " + yanlis.toString());
       });
       int ilkEleman = 0;
       if (yanlis == 3) {
