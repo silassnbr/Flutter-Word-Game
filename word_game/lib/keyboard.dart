@@ -56,6 +56,9 @@ class _GameKeyboardState extends State<GameKeyboard> {
   }
 
   void firstPage() {
+    yukseklik = [3, 3, 3, 3, 3, 3, 3, 3];
+    toplam_puan = 0;
+    flag = false;
     Navigator.of(context).push(MaterialPageRoute(
         builder: ((context) => MyHomePage(
               title: '',
@@ -218,9 +221,6 @@ class _GameKeyboardState extends State<GameKeyboard> {
                   TextButton(
                     child: Text("Tamam"),
                     onPressed: () {
-                      yukseklik = [3, 3, 3, 3, 3, 3, 3, 3];
-                      toplam_puan = 0;
-                      flag = false;
                       firstPage();
                     },
                   ),
