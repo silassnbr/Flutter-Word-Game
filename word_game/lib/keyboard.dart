@@ -232,13 +232,9 @@ class _GameKeyboardState extends State<GameKeyboard> {
     setState(() {
       if (ilkEleman < 72) {
         for (int i = 0; i < 8; i++) {
-          if (ilkEleman / 8 < 10 - anlik_yukseklik[i]) {
-            if (harfler[ilkEleman + i + 8] == "") {
-              harfler[ilkEleman + i + 8] = harfler[ilkEleman + i];
-              harfler[ilkEleman + i] = "";
-            } else {
-              anlik_yukseklik[i] += 1;
-            }
+          if (harfler[ilkEleman + i + 8] == "") {
+            harfler[ilkEleman + i + 8] = harfler[ilkEleman + i];
+            harfler[ilkEleman + i] = "";
           }
         }
       }
@@ -262,7 +258,7 @@ class _GameKeyboardState extends State<GameKeyboard> {
     for (int i = 0; i < widget.game.satir.length; i++) {
       satir = matrix[i][0];
       sutun = matrix[i][1];
-      //harfler[(satir) * 8 +sutun] = "";
+      harfler[(satir) * 8 +sutun] = "";
       yukseklik[sutun] -= 1;
     }
 
@@ -271,7 +267,7 @@ class _GameKeyboardState extends State<GameKeyboard> {
       sutun = matrix[i][1];
 
       while (harfler[((satir - 1) * 8 + sutun)] != "") {
-        harfler[(satir) * 8 + sutun] = "";
+        //harfler[(satir) * 8 + sutun] = "";
         harfler[(satir) * 8 + sutun] = harfler[(satir - 1) * 8 + sutun];
         print("alta yaz ${harfler[(satir - 1) * 8 + sutun]}");
         harfler[(satir - 1) * 8 + sutun] = "";
