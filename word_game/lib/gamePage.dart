@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:word_game/keyboard.dart';
@@ -10,6 +12,8 @@ int dogru = 0;
 int yanlis = 0;
 int toplam_puan = 0;
 int inmeZaman = 5;
+bool flag = false;
+
 
 class GamePage extends StatefulWidget {
   GamePage(this.game, this.letter, {Key? key}) : super(key: key);
@@ -58,27 +62,6 @@ class _GamePageState extends State<GamePage> {
                 anlik_yukseklik[widget.game.sutun[i]] - 1;
           }
 
-          for (int i = 0; i < 8; i++) {
-            if (yukseklik[i] == 10) {
-              dispose();
-              showDialog(
-                context: context,
-                builder: (_) => AlertDialog(
-                  title: Text("Dikkat!"),
-                  content: Text("Değer 4 oldu, işlemler durdurulacak."),
-                  actions: [
-                    TextButton(
-                      child: Text("Tamam"),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                    ),
-                  ],
-                ),
-              );
-            }
-            break;
-          }
           print(yukseklik);
         }
       });
@@ -88,20 +71,53 @@ class _GamePageState extends State<GamePage> {
     });
   }
 
+  Timer? timer;
   void changeColor() {
-    Future.delayed(Duration(seconds: inmeZaman)).then((_) {
+    timer = Timer(Duration(seconds: inmeZaman), (){
       setState(() {
         //int rand = Random().nextInt(10);
         int randSut = Random().nextInt(8);
         yukseklik[randSut] = yukseklik[randSut] + 1;
+        if (yukseklik[randSut] == 8) {
+          flag = true;
+          //dispose();
+          showDialog(
+            context: context,
+            builder: (_) => AlertDialog(
+              title: Text("Dikkat!"),
+              content: Text("Değer 4 oldu, işlemler durdurulacak."),
+              actions: [
+                TextButton(
+                  child: Text("Tamam"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ),
+          );
+          print(yukseklik);
+        }
         harfler[randSut] = widget.letter.ratio_check();
         //print("*************************    ");
         //print(yukseklik);
+        if(flag == false)
+          _asagi(randSut, randSut);
+        else
+          stopFunction();
 
-        _asagi(randSut, randSut);
       });
-      changeColor();
+      if(flag == false)
+        changeColor();
+      else {
+        print("bitti dispose a bakılmalı");
+      }
+      print("tek harf kaydırma tamamlandı");
     });
+  }
+
+  void stopFunction() {
+    timer?.cancel();
   }
 
   @override

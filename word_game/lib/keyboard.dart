@@ -88,7 +88,7 @@ class _GameKeyboardState extends State<GameKeyboard> {
                 yukseklik[widget.game.sutun[i]] - 1;
           }
 
-          for (int i = 0; i < 8; i++) {
+/*          for (int i = 0; i < 8; i++) {
             if (yukseklik[i] == 10) {
               showDialog(
                 context: context,
@@ -108,7 +108,7 @@ class _GameKeyboardState extends State<GameKeyboard> {
             }
             print(yukseklik);
             break;
-          }
+          }*/
 
           dogru = dogru + 1;
           puan();
@@ -139,9 +139,9 @@ class _GameKeyboardState extends State<GameKeyboard> {
           harfler.setRange(0, 8, falling_letters);
           for (int i = 0; i < 8; i++) {
             yukseklik[i] = yukseklik[i] + 1;
-          }
-          for (int i = 0; i < 8; i++) {
-            if (yukseklik[i] == 10) {
+            if (yukseklik[i] == 8) {
+              flag = true;
+              //dispose();
               showDialog(
                 context: context,
                 builder: (_) => AlertDialog(
@@ -151,29 +151,40 @@ class _GameKeyboardState extends State<GameKeyboard> {
                     TextButton(
                       child: Text("Tamam"),
                       onPressed: () {
-                        Navigator.of(context).pop();
+                        Navigator.of(context).pop(true);
                       },
                     ),
                   ],
                 ),
-              );
+              ).then((value) {
+                print("value ${value}");
+                if (value == true) {
+                  print("doğruya tıkladın dispose a bakılmalı");
+                }
+              });
               print(yukseklik);
+              break;
             }
+
           }
           print(yukseklik);
-          Timer.periodic(Duration(seconds: 1), (timer) {
-            setState(() {
-              if (ilkEleman < 72) {
-                kaydir(ilkEleman);
-              }
-              ilkEleman += 8;
+          if(flag == false) {
+            Timer.periodic(Duration(seconds: 1), (timer) {
+              setState(() {
+                if (ilkEleman < 72) {
+                  kaydir(ilkEleman);
+                }
+                ilkEleman += 8;
+              });
             });
-          });
+          }
+          else{
+            print("oyun bitirilecek");
+          }
+          print("8 harf kaydırma tamamlandı");
           sol();
           yanlis = 0;
         }
-        //print("Yanlış ");
-
         return false;
       }
     } else {
@@ -186,9 +197,9 @@ class _GameKeyboardState extends State<GameKeyboard> {
         harfler.setRange(0, 8, falling_letters);
         for (int i = 0; i < 8; i++) {
           yukseklik[i] = yukseklik[i] + 1;
-        }
-        for (int i = 0; i < 8; i++) {
-          if (yukseklik[i] == 10) {
+          if (yukseklik[i] == 8) {
+            flag = true;
+            //dispose();
             showDialog(
               context: context,
               builder: (_) => AlertDialog(
@@ -198,23 +209,37 @@ class _GameKeyboardState extends State<GameKeyboard> {
                   TextButton(
                     child: Text("Tamam"),
                     onPressed: () {
-                      Navigator.of(context).pop();
+                      Navigator.of(context).pop(true);
                     },
                   ),
                 ],
               ),
-            );
+            ).then((value) {
+              print("value ${value}");
+              if (value == true) {
+                print("doğruya tıkladın dispose a bakılmalı");
+              }
+            });
+            print(yukseklik);
+            break;
           }
+
         }
         print(yukseklik);
-        Timer.periodic(Duration(seconds: 1), (timer) {
-          setState(() {
-            if (ilkEleman < 72) {
-              kaydir(ilkEleman);
-            }
-            ilkEleman += 8;
+        if(flag == false) {
+          Timer.periodic(Duration(seconds: 1), (timer) {
+            setState(() {
+              if (ilkEleman < 72) {
+                kaydir(ilkEleman);
+              }
+              ilkEleman += 8;
+            });
           });
-        });
+        }
+        else{
+          print("oyun bitirilecek");
+        }
+        print("8 harf kaydırma tamamlandı");
         sol();
         yanlis = 0;
       }
