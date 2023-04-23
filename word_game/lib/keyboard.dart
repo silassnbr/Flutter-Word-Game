@@ -33,7 +33,6 @@ class _GameKeyboardState extends State<GameKeyboard> {
   void initState() {
     super.initState();
     _loadWords();
-
   }
 
   @override
@@ -84,6 +83,34 @@ class _GameKeyboardState extends State<GameKeyboard> {
         adet_harf -= secilen.length;
         print("DOĞRU ");
         setState(() {
+          for (int i = 0; i < widget.game.sutun.length; i++) {
+            anlik_yukseklik[widget.game.sutun[i]] =
+                anlik_yukseklik[widget.game.sutun[i]] - 1;
+          }
+          print("***********anlik_yukseklik**************    ");
+          print(anlik_yukseklik);
+          for (int i = 0; i < 8; i++) {
+            if (anlik_yukseklik[i] == 10) {
+              dispose();
+              showDialog(
+                context: context,
+                builder: (_) => AlertDialog(
+                  title: Text("Dikkat!"),
+                  content: Text("Değer 4 oldu, işlemler durdurulacak."),
+                  actions: [
+                    TextButton(
+                      child: Text("Tamam"),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                ),
+              );
+            }
+            break;
+          }
+
           dogru = dogru + 1;
           puan();
           if (toplam_puan < 100) {
@@ -117,6 +144,26 @@ class _GameKeyboardState extends State<GameKeyboard> {
           for (int i = 0; i < 8; i++) {
             yukseklik[i] = yukseklik[i] + 1;
           }
+          for (int i = 0; i < 8; i++) {
+            if (anlik_yukseklik[i] == 10) {
+              dispose();
+              showDialog(
+                context: context,
+                builder: (_) => AlertDialog(
+                  title: Text("Dikkat!"),
+                  content: Text("Değer 4 oldu, işlemler durdurulacak."),
+                  actions: [
+                    TextButton(
+                      child: Text("Tamam"),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                ),
+              );
+            }
+          }
           print(yukseklik);
           Timer.periodic(Duration(seconds: 1), (timer) {
             setState(() {
@@ -145,6 +192,26 @@ class _GameKeyboardState extends State<GameKeyboard> {
         for (int i = 0; i < 8; i++) {
           yukseklik[i] = yukseklik[i] + 1;
         }
+        for (int i = 0; i < 8; i++) {
+          if (anlik_yukseklik[i] == 10) {
+            dispose();
+            showDialog(
+              context: context,
+              builder: (_) => AlertDialog(
+                title: Text("Dikkat!"),
+                content: Text("Değer 4 oldu, işlemler durdurulacak."),
+                actions: [
+                  TextButton(
+                    child: Text("Tamam"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+            );
+          }
+        }
         print(yukseklik);
         Timer.periodic(Duration(seconds: 1), (timer) {
           setState(() {
@@ -157,8 +224,6 @@ class _GameKeyboardState extends State<GameKeyboard> {
         sol();
         yanlis = 0;
       }
-      //print("Yanlış ");
-
       return false;
     }
   }
@@ -167,12 +232,12 @@ class _GameKeyboardState extends State<GameKeyboard> {
     setState(() {
       if (ilkEleman < 72) {
         for (int i = 0; i < 8; i++) {
-          if(ilkEleman/8< 10 - anlik_yukseklik[i]) {
+          if (ilkEleman / 8 < 10 - anlik_yukseklik[i]) {
             if (harfler[ilkEleman + i + 8] == "") {
               harfler[ilkEleman + i + 8] = harfler[ilkEleman + i];
               harfler[ilkEleman + i] = "";
             } else {
-              anlik_yukseklik[i] +=1;
+              anlik_yukseklik[i] += 1;
             }
           }
         }
@@ -183,31 +248,33 @@ class _GameKeyboardState extends State<GameKeyboard> {
   void dogru_kaydir() async {
     widget.game.satir;
     widget.game.sutun;
-    
+
     int satir;
     int sutun;
-    List<int> sortedList = List.generate(widget.game.satir.length, (index) => index)
+    List<int> sortedList = List.generate(
+        widget.game.satir.length, (index) => index)
       ..sort((a, b) => widget.game.satir[a].compareTo(widget.game.satir[b]));
 
-    List<List<int>> matrix = sortedList.map((index) => [widget.game.satir[index], widget.game.sutun[index]]).toList();
+    List<List<int>> matrix = sortedList
+        .map((index) => [widget.game.satir[index], widget.game.sutun[index]])
+        .toList();
 
-    for(int i=0; i< widget.game.satir.length; i++){
+    for (int i = 0; i < widget.game.satir.length; i++) {
       satir = matrix[i][0];
       sutun = matrix[i][1];
       //harfler[(satir) * 8 +sutun] = "";
-      yukseklik[sutun] -=1;
+      yukseklik[sutun] -= 1;
     }
 
     for (int i = 0; i < widget.game.satir.length; i++) {
       satir = matrix[i][0];
       sutun = matrix[i][1];
 
-      while( harfler[ ((satir - 1)* 8 + sutun)] != "") {
-
-        harfler[(satir) * 8 +sutun] = "";
-        harfler[(satir) * 8 +sutun] = harfler[(satir - 1) * 8 +sutun];
-        print("alta yaz ${harfler[(satir - 1) * 8 +sutun]}");
-        harfler[(satir - 1) * 8 +sutun] = "";
+      while (harfler[((satir - 1) * 8 + sutun)] != "") {
+        harfler[(satir) * 8 + sutun] = "";
+        harfler[(satir) * 8 + sutun] = harfler[(satir - 1) * 8 + sutun];
+        print("alta yaz ${harfler[(satir - 1) * 8 + sutun]}");
+        harfler[(satir - 1) * 8 + sutun] = "";
         satir--;
       }
       anlik_yukseklik[sutun] = anlik_yukseklik[sutun] - 1;

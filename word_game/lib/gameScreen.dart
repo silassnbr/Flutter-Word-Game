@@ -31,32 +31,6 @@ class _GameScreenState extends State<GameScreen> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // CountdownTimer(
-          //   endTime: endTime,
-          //   onEnd: () {
-          //     showDialog(
-          //         context: context,
-          //         builder: (context) => AlertDialog(
-          //               title: const Text("SÜRENİZ DOLDU"),
-          //               content: Text("skor"),
-          //               actions: <Widget>[
-          //                 TextButton(
-          //                   onPressed: () {
-          //                     Navigator.of(context).push(MaterialPageRoute(
-          //                         builder: ((context) => MyHomePage(
-          //                               title: '',
-          //                             ))));
-          //                   },
-          //                   child: Container(
-          //                     color: Colors.white,
-          //                     padding: const EdgeInsets.all(14),
-          //                     child: const Text("okay"),
-          //                   ),
-          //                 ),
-          //               ],
-          //             ));
-          //   },
-          // ),
           const SizedBox(
             height: 20.0,
           ),

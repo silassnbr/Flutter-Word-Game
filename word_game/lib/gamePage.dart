@@ -51,18 +51,36 @@ class _GamePageState extends State<GamePage> {
           harfler[a] = "";
           a = a + 8;
           i++;
-          // if (harfler[a] != "") {
-          //   print("dolduuu");
-          //   showDialog(
-          //       context: context,
-          //       builder: (context) => AlertDialog(
-          //             title: Text("aaa"),
-          //           ));
-          // }
-          // update the current index to point to the new first item
         } else {
           anlik_yukseklik[randSut] = anlik_yukseklik[randSut] + 1;
           a = 72;
+          for (int i = 0; i < widget.game.sutun.length; i++) {
+            anlik_yukseklik[widget.game.sutun[i]] =
+                anlik_yukseklik[widget.game.sutun[i]] - 1;
+          }
+          print("***********anlik_yukseklik**************    ");
+          print(anlik_yukseklik);
+          for (int i = 0; i < 8; i++) {
+            if (anlik_yukseklik[i] == 10) {
+              dispose();
+              showDialog(
+                context: context,
+                builder: (_) => AlertDialog(
+                  title: Text("Dikkat!"),
+                  content: Text("Değer 4 oldu, işlemler durdurulacak."),
+                  actions: [
+                    TextButton(
+                      child: Text("Tamam"),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                ),
+              );
+            }
+            break;
+          }
           print("***********anlik_yukseklik**************    ");
           print(anlik_yukseklik);
         }
