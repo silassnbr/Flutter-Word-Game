@@ -52,7 +52,6 @@ class _GamePageState extends State<GamePage> {
           a = a + 8;
           i++;
         } else {
-          yukseklik[randSut] = yukseklik[randSut] + 1;
           a = 72;
           for (int i = 0; i < widget.game.sutun.length; i++) {
             anlik_yukseklik[widget.game.sutun[i]] =
