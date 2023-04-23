@@ -84,14 +84,12 @@ class _GameKeyboardState extends State<GameKeyboard> {
         print("DOĞRU ");
         setState(() {
           for (int i = 0; i < widget.game.sutun.length; i++) {
-            anlik_yukseklik[widget.game.sutun[i]] =
-                anlik_yukseklik[widget.game.sutun[i]] - 1;
+            yukseklik[widget.game.sutun[i]] =
+                yukseklik[widget.game.sutun[i]] - 1;
           }
-          print("***********anlik_yukseklik**************    ");
-          print(anlik_yukseklik);
+
           for (int i = 0; i < 8; i++) {
-            if (anlik_yukseklik[i] == 10) {
-              dispose();
+            if (yukseklik[i] == 10) {
               showDialog(
                 context: context,
                 builder: (_) => AlertDialog(
@@ -124,8 +122,6 @@ class _GameKeyboardState extends State<GameKeyboard> {
           } else if (toplam_puan >= 400) {
             inmeZaman = 1;
           }
-          print("*******************************************");
-          print(inmeZaman);
           dogru_kaydir();
           sol();
         });
@@ -145,8 +141,7 @@ class _GameKeyboardState extends State<GameKeyboard> {
             yukseklik[i] = yukseklik[i] + 1;
           }
           for (int i = 0; i < 8; i++) {
-            if (anlik_yukseklik[i] == 10) {
-              dispose();
+            if (yukseklik[i] == 10) {
               showDialog(
                 context: context,
                 builder: (_) => AlertDialog(
@@ -193,8 +188,7 @@ class _GameKeyboardState extends State<GameKeyboard> {
           yukseklik[i] = yukseklik[i] + 1;
         }
         for (int i = 0; i < 8; i++) {
-          if (anlik_yukseklik[i] == 10) {
-            dispose();
+          if (yukseklik[i] == 10) {
             showDialog(
               context: context,
               builder: (_) => AlertDialog(
@@ -258,7 +252,7 @@ class _GameKeyboardState extends State<GameKeyboard> {
     for (int i = 0; i < widget.game.satir.length; i++) {
       satir = matrix[i][0];
       sutun = matrix[i][1];
-      harfler[(satir) * 8 +sutun] = "";
+      harfler[(satir) * 8 + sutun] = "";
       yukseklik[sutun] -= 1;
     }
 
