@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:word_game/gamePage.dart';
 import 'package:word_game/gameScreen.dart';
+import 'package:word_game/main.dart';
 import 'package:word_game/wordle.dart';
 
 class GameKeyboard extends StatefulWidget {
@@ -52,6 +53,13 @@ class _GameKeyboardState extends State<GameKeyboard> {
         ),
       ],
     );
+  }
+
+  void firstPage() {
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: ((context) => MyHomePage(
+              title: '',
+            ))));
   }
 
   Future<bool?> sag() async {
@@ -151,7 +159,10 @@ class _GameKeyboardState extends State<GameKeyboard> {
                     TextButton(
                       child: Text("Tamam"),
                       onPressed: () {
-                        Navigator.of(context).pop(true);
+                        yukseklik = [3, 3, 3, 3, 3, 3, 3, 3];
+                        toplam_puan = 0;
+                        flag = false;
+                        firstPage();
                       },
                     ),
                   ],
@@ -165,10 +176,9 @@ class _GameKeyboardState extends State<GameKeyboard> {
               print(yukseklik);
               break;
             }
-
           }
           print(yukseklik);
-          if(flag == false) {
+          if (flag == false) {
             Timer.periodic(Duration(seconds: 1), (timer) {
               setState(() {
                 if (ilkEleman < 72) {
@@ -177,8 +187,7 @@ class _GameKeyboardState extends State<GameKeyboard> {
                 ilkEleman += 8;
               });
             });
-          }
-          else{
+          } else {
             print("oyun bitirilecek");
           }
           print("8 harf kaydırma tamamlandı");
@@ -209,7 +218,10 @@ class _GameKeyboardState extends State<GameKeyboard> {
                   TextButton(
                     child: Text("Tamam"),
                     onPressed: () {
-                      Navigator.of(context).pop(true);
+                      yukseklik = [3, 3, 3, 3, 3, 3, 3, 3];
+                      toplam_puan = 0;
+                      flag = false;
+                      firstPage();
                     },
                   ),
                 ],
@@ -223,10 +235,9 @@ class _GameKeyboardState extends State<GameKeyboard> {
             print(yukseklik);
             break;
           }
-
         }
         print(yukseklik);
-        if(flag == false) {
+        if (flag == false) {
           Timer.periodic(Duration(seconds: 1), (timer) {
             setState(() {
               if (ilkEleman < 72) {
@@ -235,8 +246,7 @@ class _GameKeyboardState extends State<GameKeyboard> {
               ilkEleman += 8;
             });
           });
-        }
-        else{
+        } else {
           print("oyun bitirilecek");
         }
         print("8 harf kaydırma tamamlandı");

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:word_game/keyboard.dart';
+import 'package:word_game/main.dart';
 import 'package:word_game/wordle.dart';
 
 List<int> yukseklik = [3, 3, 3, 3, 3, 3, 3, 3];
@@ -13,7 +14,6 @@ int yanlis = 0;
 int toplam_puan = 0;
 int inmeZaman = 5;
 bool flag = false;
-
 
 class GamePage extends StatefulWidget {
   GamePage(this.game, this.letter, {Key? key}) : super(key: key);
@@ -71,14 +71,24 @@ class _GamePageState extends State<GamePage> {
     });
   }
 
+  void navigateFirstPage() {
+    yukseklik = [3, 3, 3, 3, 3, 3, 3, 3];
+    toplam_puan = 0;
+    flag = false;
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: ((context) => MyHomePage(
+              title: '',
+            ))));
+  }
+
   Timer? timer;
   void changeColor() {
-    timer = Timer(Duration(seconds: inmeZaman), (){
+    timer = Timer(Duration(seconds: inmeZaman), () {
       setState(() {
         //int rand = Random().nextInt(10);
         int randSut = Random().nextInt(8);
         yukseklik[randSut] = yukseklik[randSut] + 1;
-        if (yukseklik[randSut] == 8) {
+        if (yukseklik[randSut] == 10) {
           flag = true;
           //dispose();
           showDialog(
@@ -90,7 +100,7 @@ class _GamePageState extends State<GamePage> {
                 TextButton(
                   child: Text("Tamam"),
                   onPressed: () {
-                    Navigator.of(context).pop();
+                    navigateFirstPage();
                   },
                 ),
               ],
@@ -101,13 +111,12 @@ class _GamePageState extends State<GamePage> {
         harfler[randSut] = widget.letter.ratio_check();
         //print("*************************    ");
         //print(yukseklik);
-        if(flag == false)
+        if (flag == false)
           _asagi(randSut, randSut);
         else
           stopFunction();
-
       });
-      if(flag == false)
+      if (flag == false)
         changeColor();
       else {
         print("bitti dispose a bakılmalı");
