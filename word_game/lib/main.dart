@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:word_game/gamePage.dart';
 import 'package:word_game/gameScreen.dart';
+import 'package:word_game/puanSayfa.dart';
+import 'package:word_game/wordle.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,9 +18,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Word_block',
       theme: ThemeData(
-        primarySwatch: Colors.deepOrange,
+        primarySwatch: Colors.brown,
       ),
-      home: const MyHomePage(title: 'word game'),
+      home: const MyHomePage(title: 'WORD GAME'),
     );
   }
 }
@@ -38,6 +40,11 @@ class _MyHomePageState extends State<MyHomePage> {
         .push(MaterialPageRoute(builder: ((context) => GameScreen())));
   }
 
+  void puanSayfasi() {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: ((context) => PuanPage(title: ''))));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,11 +59,27 @@ class _MyHomePageState extends State<MyHomePage> {
               'Lütfen Başlamak için butona basınız',
               style: TextStyle(color: Colors.brown, fontSize: 20),
             ),
+            SizedBox(
+              height: 15,
+            ),
             ElevatedButton(
                 onPressed: navigateGamePage,
                 child: const Text("OYUNA BAŞLA",
                     style: TextStyle(
-                      color: Colors.brown,
+                      color: Colors.white,
+                    ))),
+            const Text(
+              'Önceki skorlar',
+              style: TextStyle(color: Colors.brown, fontSize: 20),
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            ElevatedButton(
+                onPressed: puanSayfasi,
+                child: const Text("Puanlar",
+                    style: TextStyle(
+                      color: Colors.white,
                     ))),
           ],
         ),

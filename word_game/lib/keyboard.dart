@@ -16,6 +16,8 @@ class GameKeyboard extends StatefulWidget {
   State<GameKeyboard> createState() => _GameKeyboardState();
 }
 
+List<int> tumPuanlar = [];
+
 class _GameKeyboardState extends State<GameKeyboard> {
   // final TextEditingController _searchController = TextEditingController();
 
@@ -323,5 +325,6 @@ class _GameKeyboardState extends State<GameKeyboard> {
         toplam_puan += 8;
       else if (points[7].contains(widget.game.user_word[i])) toplam_puan += 10;
     }
+    tumPuanlar.add(toplam_puan);
   }
 }

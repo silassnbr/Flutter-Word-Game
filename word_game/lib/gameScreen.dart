@@ -13,7 +13,6 @@ class GameScreen extends StatefulWidget {
 
 class _GameScreenState extends State<GameScreen> {
   int endTime = DateTime.now().millisecondsSinceEpoch + 1000 * 20;
-
   WorldeGame _game = WorldeGame();
   Letter _letter = Letter();
   late String word;
