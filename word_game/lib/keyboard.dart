@@ -60,6 +60,12 @@ class _GameKeyboardState extends State<GameKeyboard> {
     toplam_puan = 0;
     flag = false;
     inmeZaman = 5;
+    for (int a = 0; a < sesli_harfler.length; a++) {
+      sesli_harfler[a] = "";
+    }
+    for (int a = 0; a < sessiz_harfler.length; a++) {
+      sessiz_harfler[a] = "";
+    }
     yanlis = 0;
     harfler = List.filled(80, "");
     Navigator.of(context).push(MaterialPageRoute(
@@ -97,10 +103,6 @@ class _GameKeyboardState extends State<GameKeyboard> {
         adet_harf -= secilen.length;
         print("DOĞRU ");
         setState(() {
-          for (int i = 0; i < widget.game.sutun.length; i++) {
-            yukseklik[widget.game.sutun[i]] =
-                yukseklik[widget.game.sutun[i]] - 1;
-          }
           dogru = dogru + 1;
           puan();
           if (toplam_puan < 100) {

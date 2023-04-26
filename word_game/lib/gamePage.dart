@@ -77,6 +77,12 @@ class _GamePageState extends State<GamePage> {
     flag = false;
     inmeZaman = 5;
     yanlis = 0;
+    for (int a = 0; a < sesli_harfler.length; a++) {
+      sesli_harfler[a] = "";
+    }
+    for (int a = 0; a < sessiz_harfler.length; a++) {
+      sessiz_harfler[a] = "";
+    }
     harfler = List.filled(80, "");
     Navigator.of(context).push(MaterialPageRoute(
         builder: ((context) => MyHomePage(
