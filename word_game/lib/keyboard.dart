@@ -62,13 +62,10 @@ class _GameKeyboardState extends State<GameKeyboard> {
     toplam_puan = 0;
     flag = false;
     inmeZaman = 5;
-    for (int a = 0; a < sesli_harfler.length; a++) {
-      sesli_harfler[a] = "";
-    }
-    for (int a = 0; a < sessiz_harfler.length; a++) {
-      sessiz_harfler[a] = "";
-    }
     yanlis = 0;
+    adet_sesli = 12;
+    adet_sessiz = 12;
+    adet_harf = 24;
     harfler = List.filled(80, "");
     Navigator.of(context).push(MaterialPageRoute(
         builder: ((context) => MyHomePage(
