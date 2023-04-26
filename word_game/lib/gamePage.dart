@@ -71,16 +71,15 @@ class _GamePageState extends State<GamePage> {
     });
   }
 
-  void navigateFirstPage() {
+  Future<void> navigateFirstPage() async {
     yukseklik = [3, 3, 3, 3, 3, 3, 3, 3];
     toplam_puan = 0;
     flag = false;
     inmeZaman = 5;
     yanlis = 0;
-    adet_sesli = 12;
-    adet_sessiz = 12;
-    adet_harf = 24;
+
     harfler = List.filled(80, "");
+
     Navigator.of(context).push(MaterialPageRoute(
         builder: ((context) => MyHomePage(
               title: '',

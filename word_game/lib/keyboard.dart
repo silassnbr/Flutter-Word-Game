@@ -57,7 +57,7 @@ class _GameKeyboardState extends State<GameKeyboard> {
     );
   }
 
-  void firstPage() {
+  Future<void> firstPage() async {
     yukseklik = [3, 3, 3, 3, 3, 3, 3, 3];
     toplam_puan = 0;
     flag = false;
@@ -67,6 +67,7 @@ class _GameKeyboardState extends State<GameKeyboard> {
     adet_sessiz = 12;
     adet_harf = 24;
     harfler = List.filled(80, "");
+
     Navigator.of(context).push(MaterialPageRoute(
         builder: ((context) => MyHomePage(
               title: '',
