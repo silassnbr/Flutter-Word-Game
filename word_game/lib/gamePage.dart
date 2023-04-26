@@ -47,8 +47,9 @@ class _GamePageState extends State<GamePage> {
   }
 
   int i = 0;
+  Timer? timer_asagi;
   void _asagi(int a, int randSut) {
-    Future.delayed(Duration(seconds: 1)).then((_) {
+    timer_asagi = Timer(Duration(seconds: 1), ()  {
       setState(() {
         if (harfler[a + 8] == "") {
           harfler[a + 8] = harfler[a];
@@ -132,6 +133,7 @@ class _GamePageState extends State<GamePage> {
 
   void stopFunction() {
     timer?.cancel();
+    timer_asagi?.cancel();
   }
 
   @override
