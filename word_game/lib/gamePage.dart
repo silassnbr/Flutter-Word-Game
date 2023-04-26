@@ -49,7 +49,7 @@ class _GamePageState extends State<GamePage> {
   int i = 0;
   Timer? timer_asagi;
   void _asagi(int a, int randSut) {
-    timer_asagi = Timer(Duration(seconds: 1), ()  {
+    timer_asagi = Timer(Duration(seconds: 1), () {
       setState(() {
         if (harfler[a + 8] == "") {
           harfler[a + 8] = harfler[a];
@@ -205,19 +205,13 @@ class _GamePageState extends State<GamePage> {
         }).toList(),
         SizedBox(height: 20.0),
         Text(
-          "harf  " + widget.game.user_word.toString(),
-          style: TextStyle(fontSize: 20),
+          "Kelime:  " + widget.game.user_word.toString(),
+          style: TextStyle(fontSize: 20, color: Colors.purple.shade900),
         ),
-        Text(
-          "satır  " + widget.game.satir.toString(),
-          style: TextStyle(fontSize: 20),
-        ),
-        Text(
-          "sutun  " + widget.game.sutun.toString(),
-          style: TextStyle(fontSize: 20),
-        ),
-        Text("yanlis   " + yanlis.toString()),
-        Text("toplam_puan   " + toplam_puan.toString()),
+        Text("Yanlış Sayısı:   " + yanlis.toString(),
+            style: TextStyle(fontSize: 20, color: Colors.purple.shade900)),
+        Text("Toplam Puan:  " + toplam_puan.toString(),
+            style: TextStyle(fontSize: 20, color: Colors.purple.shade900)),
       ],
     );
   }
